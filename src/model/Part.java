@@ -90,4 +90,8 @@ public abstract class Part {
         }
     }
     
+    public static ObservableList<Part> getAllParts() {
+        return allParts;
+    }
+    
 }

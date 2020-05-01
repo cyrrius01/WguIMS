@@ -17,6 +17,9 @@ import javafx.scene.layout.AnchorPane;
 import model.*;
 import static model.Part.allParts;
 import static model.Product.allProducts;
+import model.Part;
+import model.Product;
+import model.Inventory;
 
 /**
  *
@@ -79,65 +82,103 @@ public class MainScreenController implements Initializable {
     @FXML
     private Button partsDeleteBtn;
     
-    
-    public void onPartsSearch(ActionEvent actionEvent) {
-        System.out.println("Parts Search Clicked");
-    }
-    
-    public void onPartsAdd(ActionEvent actionEvent) {
-        System.out.println("Parts Add Clicked");
-    }
-    
-    public void onPartsModify(ActionEvent actionEvent) {
-        System.out.println("Parts Modify Clicked");
-    }
-    
-    public void onPartsDelete(ActionEvent actionEvent) {
-        System.out.println("Parts Delete Clicked");
-    }
-    
-    public void onProductsSearch(ActionEvent actionEvent) {
-        System.out.println("Products Search Clicked");
-    }
-    
-    public void onProductsAdd(ActionEvent actionEvent){
-        System.out.println("Products Add Clicked");
-    }
-    
-    public void onProductsModify(ActionEvent actionEvent){
-        System.out.println("Products Modify Clicked");
-    }
-    
-    public void onProductsDelete(ActionEvent actionEvent){
-        System.out.println("Products Delete Clicked");
-    }
-    
-    public void onMainExit(ActionEvent actionEvent){
-        System.out.println("Main Exit Clicked");
-        System.exit(0);
-    }
-    
-    
-    // refactor the following - Cannot Make a Part! Must be InHouse or OutSource due to Part being Abstract
-    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        
-        partsTableView.setItems(allParts); // this table is on the Main screen and the upper table of Add Product and Modify Product screens
-        // productsTableView.setItems(fewParts); // this table is part of the Add Product and Modify Product screens
         
         partIdCol.setCellValueFactory(new PropertyValueFactory<>("id"));
         partNameCol.setCellValueFactory(new PropertyValueFactory<>("name"));
         partsInventoryLevelCol.setCellValueFactory(new PropertyValueFactory<>("stock"));
         partsPriceCol.setCellValueFactory(new PropertyValueFactory<>("price"));
         
+        ObservableList<Part> parts = Part.getAllParts();
+        partsTableView.setItems(parts);
+        
+        
         productsTableView.setItems(allProducts);
         productIdCol.setCellValueFactory(new PropertyValueFactory<>("id"));
         productNameCol.setCellValueFactory(new PropertyValueFactory<>("name"));
         productsInventoryLevelCol.setCellValueFactory(new PropertyValueFactory<>("stock"));
-        productsPriceCol.setCellValueFactory(new PropertyValueFactory<>("price"));
+        productsPriceCol.setCellValueFactory(new PropertyValueFactory<>("price"));   
         
-
-       
+        ObservableList<Product> products = Product.getAllProducts();
+        productsTableView.setItems(products);
     }    
+    
+    
+    
+    public void onPartsSearch(ActionEvent actionEvent) {
+        String q = partsTextField.getText();
+        
+        ObservableList<Part> parts = searchPartName(q);
+        
+        partsTableView.setItems(parts);
+        partsTextField.setText("");
+    }
+    
+    
+    
+    private ObservableList<Part> searchPartName(String partialName) {
+       ObservableList<Part> namedParts = FXCollections.observableArrayList();
+       
+       ObservableList<Part> allParts = Part.getAllParts();
+       
+       for(Part pt : allParts) {
+           if(pt.getName().contains(partialName)) { 
+               namedParts.add(pt);
+           }
+       }
+       
+       return namedParts;
+    }
+    
+    
+    
+    public void onPartsAdd(ActionEvent actionEvent) {
+        System.out.println("Parts Add Clicked");
+    }
+    
+    
+    
+    public void onPartsModify(ActionEvent actionEvent) {
+        System.out.println("Parts Modify Clicked");
+    }
+    
+    
+    
+    public void onPartsDelete(ActionEvent actionEvent) {
+        System.out.println("Parts Delete Clicked");
+    }
+    
+    
+    
+    public void onProductsSearch(ActionEvent actionEvent) {
+        System.out.println("Products Search Clicked");
+    }
+    
+    
+    
+    public void onProductsAdd(ActionEvent actionEvent){
+        System.out.println("Products Add Clicked");
+    }
+    
+    
+    
+    public void onProductsModify(ActionEvent actionEvent){
+        System.out.println("Products Modify Clicked");
+    }
+    
+    
+    
+    public void onProductsDelete(ActionEvent actionEvent){
+        System.out.println("Products Delete Clicked");
+    }
+    
+    
+    
+    public void onMainExit(ActionEvent actionEvent){
+        System.out.println("Main Exit Clicked");
+        System.exit(0);
+    }
+    
+   
 }

@@ -108,4 +108,8 @@ public class Product {
         }
     }
     
+    public static ObservableList<Product> getAllProducts() {
+        return allProducts;
+    }
+    
 }
