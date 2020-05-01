@@ -10,14 +10,16 @@ import javafx.collections.ObservableList;
 public class Inventory {
     
     private static ObservableList<Part> allParts;
-    private ObservableList<Product> allProducts;
+    private static ObservableList<Product> allProducts;
     
     public void addPart(Part newPart) {
         // To do
+        // to set Id automatically, get current size of array list and add one
     }
     
     public void addProduct(Product newProduct) {
         // To do
+        // to set Id automatically, get current size of array list and add one
     }
     
     
@@ -53,20 +55,37 @@ public class Inventory {
     
     
     
+    
+    public static Product lookupProduct(int productId) {
+        ObservableList<Product> allProducts = Product.getAllProducts();
+        
+        for(Product pdt : allProducts) {
+            if(pdt.getId() == productId) {
+                return pdt;
+            }
+        }
+        
+        return null;
+    }
+    
+    
+    
+    public static ObservableList<Product> lookupProduct(String partialName) {
+        ObservableList<Product> namedProducts = FXCollections.observableArrayList();
+        
+        ObservableList<Product> allProducts = Product.getAllProducts();
+        
+        for(Product pdt : allProducts) {
+            if(pdt.getName().contains(partialName)) {
+                namedProducts.add(pdt);
+            }
+        }
+        
+        return namedProducts;
+    }
+    
 
-//    public Product lookupProduct(int productId) {
-//        // get entered productId
-//        // search allProducts by productId Product.id = productId
-//        // if found, add to results and return result
-//    }
-//    
 
-//    public ObservableList<Product> lookupProduct(String productName) {
-//        // get entered productName
-//        // search allProducts using enhance for loop doing partial match Product.productName.contains(productName)
-//        // if found, add to results and return result
-//    }
-//    
 //    public void updatePart(int index, Part selectedPart) {
 //        // To do
 //    }
@@ -87,7 +106,7 @@ public class Inventory {
         return allParts;
     }
     
-    public ObservableList<Product> getAllProducts() {
+    public static ObservableList<Product> getAllProducts() {
         return allProducts;
     }
     

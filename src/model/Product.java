@@ -16,7 +16,7 @@ public class Product {
     private int min;
     private int max;
     
-    public static ObservableList<Product> allProducts = FXCollections.observableArrayList();
+    private static ObservableList<Product> allProducts = FXCollections.observableArrayList();
     
     public Product(ObservableList<Part> associatedParts,int id, String name, double price, int stock, int min, int max) {
         this.associatedParts = associatedParts;
@@ -99,12 +99,12 @@ public class Product {
     
     public static void init() {
         if (allProducts.isEmpty()) {
-            allProducts.add(new Product(associatedParts, 1, "Intel PC 1", 1299.00, 20, 5, 20));
-            allProducts.add(new Product(associatedParts, 2, "Intel PC 2", 1199.00, 19, 5, 20));
-            allProducts.add(new Product(associatedParts, 3, "Intel PC 3", 999.00, 15, 5, 20));
-            allProducts.add(new Product(associatedParts, 4, "AMD PC 1", 699.00, 12, 5, 20));
-            allProducts.add(new Product(associatedParts, 5, "AMD PC 2", 650.00, 12, 5, 20));
-            allProducts.add(new Product(associatedParts, 6, "AMD PC 3", 499.00, 7, 5, 20));
+            allProducts.add(new Product(associatedParts, 1, "Intel PC A", 1299.00, 20, 5, 20));
+            allProducts.add(new Product(associatedParts, 2, "Intel PC B", 1199.00, 19, 5, 20));
+            allProducts.add(new Product(associatedParts, 3, "Intel PC C", 999.00, 15, 5, 20));
+            allProducts.add(new Product(associatedParts, 4, "AMD PC A", 699.00, 12, 5, 20));
+            allProducts.add(new Product(associatedParts, 5, "AMD PC B", 650.00, 12, 5, 20));
+            allProducts.add(new Product(associatedParts, 6, "AMD PC C", 499.00, 7, 5, 20));
         }
     }
     

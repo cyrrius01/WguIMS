@@ -2,7 +2,6 @@ package controller;
 
 import java.net.URL;
 import java.util.ResourceBundle;
-import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -14,9 +13,6 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
-import model.*;
-import static model.Part.allParts;
-import static model.Product.allProducts;
 import model.Part;
 import model.Product;
 import model.Inventory;
@@ -95,7 +91,7 @@ public class MainScreenController implements Initializable {
         partsTableView.setItems(parts);
         
         
-        productsTableView.setItems(allProducts);
+      
         productIdCol.setCellValueFactory(new PropertyValueFactory<>("id"));
         productNameCol.setCellValueFactory(new PropertyValueFactory<>("name"));
         productsInventoryLevelCol.setCellValueFactory(new PropertyValueFactory<>("stock"));
@@ -108,6 +104,7 @@ public class MainScreenController implements Initializable {
     
     
     public void onPartsSearch(ActionEvent actionEvent) {
+        
         String q = partsTextField.getText();
         
         ObservableList<Part> parts = Inventory.lookupPart(q); // search by part name method called here
@@ -134,32 +131,7 @@ public class MainScreenController implements Initializable {
     
     
     
-//    private ObservableList<Part> searchPartName(String partialName) {
-//       ObservableList<Part> namedParts = FXCollections.observableArrayList();
-//       
-//       ObservableList<Part> allParts = Part.getAllParts();
-//       
-//       for(Part pt : allParts) {
-//           if(pt.getName().contains(partialName)) { 
-//               namedParts.add(pt);
-//           }
-//       }
-//       
-//       return namedParts;
-//    }
-    
-    
-//    private Part searchPartId(int partId) {
-//       ObservableList<Part> allParts = Part.getAllParts();
-//       
-//       for(Part pt : allParts) {
-//           if(pt.getId() == partId) {
-//               return pt;
-//           }
-//       }
-//        
-//        return null;
-//    }
+
     
     
     public void onPartsAdd(ActionEvent actionEvent) {
@@ -181,7 +153,29 @@ public class MainScreenController implements Initializable {
     
     
     public void onProductsSearch(ActionEvent actionEvent) {
-        System.out.println("Products Search Clicked");
+        
+        String r = productsTextField.getText();
+        
+        ObservableList<Product> products = Inventory.lookupProduct(r);
+        
+        if(products.size() == 0) {
+            
+            try {
+                int productId = Integer.parseInt(r);
+                Product pdt = Inventory.lookupProduct(productId);
+                if(pdt != null)
+                    products.add(pdt);
+            }
+            
+            catch(NumberFormatException e)
+            {
+                // ignore
+            }
+            
+        }
+        
+        productsTableView.setItems(products);
+        productsTextField.setText("");
     }
     
     
