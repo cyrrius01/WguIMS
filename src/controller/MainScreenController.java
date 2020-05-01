@@ -21,6 +21,7 @@ import model.Part;
 import model.Product;
 import model.Inventory;
 
+
 /**
  *
  * @author Keith Graham 4/28/2020
@@ -109,28 +110,56 @@ public class MainScreenController implements Initializable {
     public void onPartsSearch(ActionEvent actionEvent) {
         String q = partsTextField.getText();
         
-        ObservableList<Part> parts = searchPartName(q);
+        ObservableList<Part> parts = Inventory.lookupPart(q); // search by part name method called here
         
+        if(parts.size() == 0) {
+            
+            try {
+                int partId = Integer.parseInt(q);
+                Part pt = Inventory.lookupPart(partId);         // search by part ID method called here
+                if(pt != null) 
+                    parts.add(pt);
+            
+            }
+            
+            catch(NumberFormatException e)
+            
+            {
+                // ignore
+            }
+        }
         partsTableView.setItems(parts);
         partsTextField.setText("");
     }
     
     
     
-    private ObservableList<Part> searchPartName(String partialName) {
-       ObservableList<Part> namedParts = FXCollections.observableArrayList();
-       
-       ObservableList<Part> allParts = Part.getAllParts();
-       
-       for(Part pt : allParts) {
-           if(pt.getName().contains(partialName)) { 
-               namedParts.add(pt);
-           }
-       }
-       
-       return namedParts;
-    }
+//    private ObservableList<Part> searchPartName(String partialName) {
+//       ObservableList<Part> namedParts = FXCollections.observableArrayList();
+//       
+//       ObservableList<Part> allParts = Part.getAllParts();
+//       
+//       for(Part pt : allParts) {
+//           if(pt.getName().contains(partialName)) { 
+//               namedParts.add(pt);
+//           }
+//       }
+//       
+//       return namedParts;
+//    }
     
+    
+//    private Part searchPartId(int partId) {
+//       ObservableList<Part> allParts = Part.getAllParts();
+//       
+//       for(Part pt : allParts) {
+//           if(pt.getId() == partId) {
+//               return pt;
+//           }
+//       }
+//        
+//        return null;
+//    }
     
     
     public void onPartsAdd(ActionEvent actionEvent) {

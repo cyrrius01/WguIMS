@@ -1,5 +1,6 @@
 package model;
 
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 /**
@@ -19,24 +20,47 @@ public class Inventory {
         // To do
     }
     
-//    public Part lookupPart(int partId) {
-//        // get entered partId
-//        // search allParts by partId Part.id = partId
-//        // if found, add to results and return result
-//    }
-//    
+    
+    public static Part lookupPart(int partId) {
+       ObservableList<Part> allParts = Part.getAllParts();
+       
+       for(Part pt : allParts) {
+           if(pt.getId() == partId) {
+               return pt;
+           }
+       }
+        
+        return null;
+    }
+    
+
+    
+    
+    
+    public static ObservableList<Part> lookupPart(String partialName) {
+       ObservableList<Part> namedParts = FXCollections.observableArrayList();
+       
+       ObservableList<Part> allParts = Part.getAllParts();
+       
+       for(Part pt : allParts) {
+           if(pt.getName().contains(partialName)) { 
+               namedParts.add(pt);
+           }
+       }
+       
+       return namedParts;
+    }
+    
+    
+    
+
 //    public Product lookupProduct(int productId) {
 //        // get entered productId
 //        // search allProducts by productId Product.id = productId
 //        // if found, add to results and return result
 //    }
 //    
-//    public ObservableList<Part> lookupPart(String partName) {
-//        // get entered partName
-//        // search allProducts by partName doing a partial match Part.partName.contains(partName)
-//        // if found, add to results and return result
-//    }
-//    
+
 //    public ObservableList<Product> lookupProduct(String productName) {
 //        // get entered productName
 //        // search allProducts using enhance for loop doing partial match Product.productName.contains(productName)
