@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="501.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/11.0.1" fx:controller="controller.AddPartScreenController">
+   <children>
+      <GridPane layoutY="-3.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="508.0">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+        </columnConstraints>
+        <rowConstraints>
+            <RowConstraints maxHeight="126.19999542236329" minHeight="10.0" prefHeight="54.00000190734863" vgrow="SOMETIMES" />
+          <RowConstraints maxHeight="126.19999542236329" minHeight="0.0" prefHeight="51.80000610351562" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="126.19999542236329" minHeight="10.0" prefHeight="49.400000000000006" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="126.19999542236329" minHeight="10.0" prefHeight="49.400000000000006" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="126.19999542236329" minHeight="10.0" prefHeight="45.20001831054688" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="126.19999542236329" minHeight="10.0" prefHeight="51.400006103515636" vgrow="SOMETIMES" />
+          <RowConstraints maxHeight="343.99998779296874" minHeight="10.0" prefHeight="48.99997558593748" vgrow="SOMETIMES" />
+          <RowConstraints maxHeight="111.00002441406252" minHeight="4.600012207031284" prefHeight="57.800024414062534" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <padding>
+            <Insets left="10.0" />
+         </padding>
+         <children>
+            <Label fx:id="addPartLabel" text="Add Part">
+               <padding>
+                  <Insets left="10.0" />
+               </padding>
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Label>
+            <RadioButton fx:id="addPartInHouseRadio" mnemonicParsing="false" text="In-House" GridPane.columnIndex="1">
+               <GridPane.margin>
+                  <Insets left="30.0" />
+               </GridPane.margin>
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </RadioButton>
+            <RadioButton fx:id="addPartOutsourcedRadio" mnemonicParsing="false" text="Outsourced" GridPane.columnIndex="2">
+               <GridPane.margin>
+                  <Insets left="30.0" />
+               </GridPane.margin>
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </RadioButton>
+            <Label fx:id="addPartIdLabel" text="ID" GridPane.rowIndex="1">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+               <GridPane.margin>
+                  <Insets left="50.0" />
+               </GridPane.margin>
+            </Label>
+            <Label fx:id="addPartNameLabel" text="Name" GridPane.rowIndex="2">
+               <GridPane.margin>
+                  <Insets left="50.0" />
+               </GridPane.margin>
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Label>
+            <Label fx:id="addPartInventoryLabel" text="Inv" GridPane.rowIndex="3">
+               <GridPane.margin>
+                  <Insets left="50.0" />
+               </GridPane.margin>
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Label>
+            <Label fx:id="addPartPriceLabel" text="Price/Cost" GridPane.rowIndex="4">
+               <GridPane.margin>
+                  <Insets left="50.0" />
+               </GridPane.margin>
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Label>
+            <Label fx:id="addPartMaxLabel" text="Max" GridPane.rowIndex="5">
+               <GridPane.margin>
+                  <Insets left="50.0" />
+               </GridPane.margin>
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Label>
+            <Label fx:id="addPartInOutLabel" text="Text" GridPane.rowIndex="6">
+               <GridPane.margin>
+                  <Insets left="50.0" />
+               </GridPane.margin>
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Label>
+            <TextField fx:id="addPartIdField" disable="true" editable="false" prefWidth="281.0" promptText="Auto Gen - Disabled" GridPane.columnIndex="1" GridPane.rowIndex="1">
+               <font>
+                  <Font name="System Italic" size="12.0" />
+               </font>
+            </TextField>
+            <TextField fx:id="addPartNameField" promptText="Part Name" GridPane.columnIndex="1" GridPane.rowIndex="2">
+               <font>
+                  <Font name="System Italic" size="12.0" />
+               </font>
+            </TextField>
+            <TextField fx:id="addPartInventoryField" promptText="Inv" GridPane.columnIndex="1" GridPane.rowIndex="3">
+               <font>
+                  <Font name="System Italic" size="12.0" />
+               </font>
+            </TextField>
+            <TextField fx:id="addPartPriceField" promptText="Price/Cost" GridPane.columnIndex="1" GridPane.rowIndex="4">
+               <font>
+                  <Font name="System Italic" size="12.0" />
+               </font>
+            </TextField>
+            <TextField fx:id="addPartMaxField" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="26.0" prefWidth="86.0" promptText="Max" GridPane.columnIndex="1" GridPane.rowIndex="5">
+               <font>
+                  <Font name="System Italic" size="12.0" />
+               </font>
+            </TextField>
+            <TextField fx:id="addPartInOutField" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+            <TextField fx:id="addPartMinField" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="26.0" prefWidth="86.0" promptText="Min" GridPane.columnIndex="3" GridPane.rowIndex="5">
+               <font>
+                  <Font name="System Italic" size="12.0" />
+               </font>
+            </TextField>
+            <Label fx:id="addPartMinLabel" text="Min" GridPane.columnIndex="2" GridPane.rowIndex="5">
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+               <GridPane.margin>
+                  <Insets left="80.0" />
+               </GridPane.margin>
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Label>
+            <Button fx:id="addPartSaveBtn" mnemonicParsing="false" prefHeight="26.0" prefWidth="96.0" text="Save" GridPane.columnIndex="2" GridPane.rowIndex="7" />
+            <Button fx:id="addPartCancelBtn" mnemonicParsing="false" prefHeight="26.0" prefWidth="96.0" text="Cancel" GridPane.columnIndex="3" GridPane.rowIndex="7" />
+         </children>
+      </GridPane>
+   </children>
+</AnchorPane>

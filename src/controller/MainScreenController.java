@@ -1,0 +1,143 @@
+package controller;
+
+import java.net.URL;
+import java.util.ResourceBundle;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.AnchorPane;
+import model.*;
+import static model.Part.allParts;
+import static model.Product.allProducts;
+
+/**
+ *
+ * @author Keith Graham 4/28/2020
+ */
+
+public class MainScreenController implements Initializable {
+    
+    private Label label;
+    @FXML
+    private AnchorPane productsAnchorPane;
+    @FXML
+    public TableView productsTableView;
+    @FXML
+    public TableColumn productIdCol;
+    @FXML
+    public TableColumn productNameCol;
+    @FXML
+    public TableColumn productsInventoryLevelCol;
+    @FXML
+    public TableColumn productsPriceCol;
+    @FXML
+    private Label labelProducts;
+    @FXML
+    private Button productsSearchBtn;
+    @FXML
+    private TextField productsTextField;
+    @FXML
+    private Button productsModifyBtn;
+    @FXML
+    private Button productsAddBtn;
+    @FXML
+    private Button productsDeleteBtn;
+    @FXML
+    private Label labelMain;
+    @FXML
+    private Button mainExitBtn;
+    @FXML
+    private AnchorPane partsAnchorPane;
+    @FXML
+    public TableView partsTableView;
+    @FXML
+    public TableColumn partIdCol;
+    @FXML
+    public TableColumn partNameCol;
+    @FXML
+    public TableColumn partsInventoryLevelCol;
+    @FXML
+    public TableColumn partsPriceCol;
+    @FXML
+    private Label labelParts;
+    @FXML
+    private Button partsSearchBtn;
+    @FXML
+    private TextField partsTextField;
+    @FXML
+    private Button partsModifyBtn;
+    @FXML
+    private Button partsAddBtn;
+    @FXML
+    private Button partsDeleteBtn;
+    
+    
+    public void onPartsSearch(ActionEvent actionEvent) {
+        System.out.println("Parts Search Clicked");
+    }
+    
+    public void onPartsAdd(ActionEvent actionEvent) {
+        System.out.println("Parts Add Clicked");
+    }
+    
+    public void onPartsModify(ActionEvent actionEvent) {
+        System.out.println("Parts Modify Clicked");
+    }
+    
+    public void onPartsDelete(ActionEvent actionEvent) {
+        System.out.println("Parts Delete Clicked");
+    }
+    
+    public void onProductsSearch(ActionEvent actionEvent) {
+        System.out.println("Products Search Clicked");
+    }
+    
+    public void onProductsAdd(ActionEvent actionEvent){
+        System.out.println("Products Add Clicked");
+    }
+    
+    public void onProductsModify(ActionEvent actionEvent){
+        System.out.println("Products Modify Clicked");
+    }
+    
+    public void onProductsDelete(ActionEvent actionEvent){
+        System.out.println("Products Delete Clicked");
+    }
+    
+    public void onMainExit(ActionEvent actionEvent){
+        System.out.println("Main Exit Clicked");
+        System.exit(0);
+    }
+    
+    
+    // refactor the following - Cannot Make a Part! Must be InHouse or OutSource due to Part being Abstract
+    
+    @Override
+    public void initialize(URL url, ResourceBundle rb) {
+        
+        partsTableView.setItems(allParts); // this table is on the Main screen and the upper table of Add Product and Modify Product screens
+        // productsTableView.setItems(fewParts); // this table is part of the Add Product and Modify Product screens
+        
+        partIdCol.setCellValueFactory(new PropertyValueFactory<>("id"));
+        partNameCol.setCellValueFactory(new PropertyValueFactory<>("name"));
+        partsInventoryLevelCol.setCellValueFactory(new PropertyValueFactory<>("stock"));
+        partsPriceCol.setCellValueFactory(new PropertyValueFactory<>("price"));
+        
+        productsTableView.setItems(allProducts);
+        productIdCol.setCellValueFactory(new PropertyValueFactory<>("id"));
+        productNameCol.setCellValueFactory(new PropertyValueFactory<>("name"));
+        productsInventoryLevelCol.setCellValueFactory(new PropertyValueFactory<>("stock"));
+        productsPriceCol.setCellValueFactory(new PropertyValueFactory<>("price"));
+        
+
+       
+    }    
+}

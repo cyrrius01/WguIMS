@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
+
+<GridPane alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="606.0" prefWidth="1250.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.MainScreenController">
+   <columnConstraints>
+      <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="662.0" minWidth="10.0" prefWidth="610.0" />
+      <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="742.0" minWidth="10.0" prefWidth="620.0" />
+   </columnConstraints>
+   <rowConstraints>
+      <RowConstraints maxHeight="197.0" minHeight="0.0" prefHeight="65.0" vgrow="SOMETIMES" />
+      <RowConstraints maxHeight="517.0" minHeight="10.0" prefHeight="455.0" vgrow="SOMETIMES" />
+      <RowConstraints maxHeight="106.0" minHeight="3.0" prefHeight="55.0" vgrow="SOMETIMES" />
+   </rowConstraints>
+   <children>
+      <Label fx:id="labelMain" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="16" minWidth="69" prefHeight="18.0" prefWidth="199.0" text="Inventory Management System" GridPane.halignment="LEFT">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+         <GridPane.margin>
+            <Insets />
+         </GridPane.margin>
+         <padding>
+            <Insets left="10.0" />
+         </padding>
+      </Label>
+      <AnchorPane fx:id="partsAnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="268.0" prefWidth="570.0" style="-fx-border-color: lightgrey; -fx-border-radius: 5;" GridPane.rowIndex="1">
+         <children>
+            <Label fx:id="labelParts" layoutX="26.0" layoutY="28.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="18.0" prefWidth="58.0" text="Parts">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Label>
+            <Button fx:id="partsSearchBtn" layoutX="258.0" layoutY="25.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#onPartsSearch" prefHeight="26.0" prefWidth="74.0" text="Search" />
+            <TextField fx:id="partsTextField" layoutX="348.0" layoutY="25.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="26.0" prefWidth="200.0" />
+            <TableView fx:id="partsTableView" layoutX="15.0" layoutY="67.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="134.0" prefWidth="540.0">
+               <columns>
+                  <TableColumn fx:id="partIdCol" minWidth="-Infinity" prefWidth="102.0" resizable="false" text="Part ID" />
+                  <TableColumn fx:id="partNameCol" minWidth="-Infinity" prefWidth="140.0" resizable="false" text="Part Name" />
+                  <TableColumn fx:id="partsInventoryLevelCol" minWidth="-Infinity" prefWidth="140.0" resizable="false" text="Inventory Level" />
+                  <TableColumn fx:id="partsPriceCol" minWidth="-Infinity" prefWidth="158.0" resizable="false" text="Price/Cost per Unit" />
+               </columns>
+            </TableView>
+            <Button fx:id="partsAddBtn" layoutX="112.0" layoutY="214.0" mnemonicParsing="false" onAction="#onPartsAdd" prefHeight="26.0" prefWidth="74.0" text="Add" />
+            <Button fx:id="partsModifyBtn" layoutX="199.0" layoutY="214.0" mnemonicParsing="false" onAction="#onPartsModify" prefHeight="26.0" prefWidth="74.0" text="Modify" />
+            <Button fx:id="partsDeleteBtn" layoutX="285.0" layoutY="214.0" mnemonicParsing="false" onAction="#onPartsDelete" prefHeight="26.0" prefWidth="74.0" text="Delete" />
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="productsAnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="268.0" prefWidth="570.0" style="-fx-border-color: lightgrey; -fx-border-radius: 5;" GridPane.columnIndex="1" GridPane.rowIndex="1">
+         <children>
+            <Label fx:id="labelProducts" layoutX="26.0" layoutY="28.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="20.0" prefWidth="98.0" text="Products">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Label>
+            <Button fx:id="productsSearchBtn" layoutX="260.0" layoutY="27.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#onProductsSearch" prefHeight="26.0" prefWidth="74.0" text="Search" />
+            <TextField fx:id="productsTextField" layoutX="342.0" layoutY="27.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="200.0" />
+            <TableView fx:id="productsTableView" layoutX="16.0" layoutY="67.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="134.0" prefWidth="540.0">
+               <columns>
+                  <TableColumn fx:id="productIdCol" minWidth="-Infinity" prefWidth="102.0" resizable="false" text="Product ID" />
+                  <TableColumn fx:id="productNameCol" minWidth="-Infinity" prefWidth="140.0" resizable="false" text="Product Name" />
+                  <TableColumn fx:id="productsInventoryLevelCol" minWidth="-Infinity" prefWidth="140.0" resizable="false" text="Inventory Level" />
+                  <TableColumn fx:id="productsPriceCol" minWidth="-Infinity" prefWidth="158.0" resizable="false" text="Price/Cost per Unit" />
+               </columns>
+            </TableView>
+            <Button fx:id="productsAddBtn" layoutX="107.0" layoutY="217.0" mnemonicParsing="false" onAction="#onProductsAdd" prefHeight="26.0" prefWidth="74.0" text="Add" />
+            <Button fx:id="productsModifyBtn" layoutX="193.0" layoutY="217.0" mnemonicParsing="false" onAction="#onProductsModify" prefHeight="26.0" prefWidth="74.0" text="Modify" />
+            <Button fx:id="productsDeleteBtn" layoutX="280.0" layoutY="217.0" mnemonicParsing="false" onAction="#onProductsDelete" prefHeight="26.0" prefWidth="74.0" text="Delete" />
+         </children>
+      </AnchorPane>
+      <Button fx:id="mainExitBtn" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#onMainExit" prefHeight="26.0" prefWidth="97.0" text="Exit" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="2">
+         <GridPane.margin>
+            <Insets right="60.0" />
+         </GridPane.margin></Button>
+   </children>
+   <padding>
+      <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+   </padding>
+</GridPane>
