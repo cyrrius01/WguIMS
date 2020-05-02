@@ -1,11 +1,15 @@
 package controller;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
@@ -13,6 +17,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
 import model.Part;
 import model.Product;
 import model.Inventory;
@@ -134,9 +139,23 @@ public class MainScreenController implements Initializable {
 
     
     
-    public void onPartsAdd(ActionEvent actionEvent) {
+    public void onPartsAdd(ActionEvent actionEvent) throws IOException {
         System.out.println("Parts Add Clicked");
-    }
+        
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/addPartScreen.fxml"));
+        Parent root = loader.load(); // AddPartScreenController initializes here
+        
+        Stage stage = new Stage();
+        stage.setTitle("");
+        stage.setScene(new Scene(root, 600, 400));
+        stage.show();
+        stage.setResizable(false);
+        
+     
+        
+    }    
+    
+    
     
     
     
