@@ -16,6 +16,7 @@ import javafx.stage.Stage;
 import model.Part;
 import model.InHouse;
 import model.Inventory;
+import model.Outsourced;
 
 /**
  * FXML Controller class
@@ -112,31 +113,41 @@ public class AddPartScreenController implements Initializable {
             } 
         }
         
+        String name = addPartNameField.getText();
+        double price = Double.parseDouble(addPartPriceField.getText());
+        int stock = Integer.parseInt(addPartInventoryField.getText());
+        int min = Integer.parseInt(addPartMinField.getText());
+        int max = Integer.parseInt(addPartMaxField.getText());
         
         if(addPartInHouseRadio.isSelected()) {
        
-            String name = addPartNameField.getText();
-            double price = Double.parseDouble(addPartPriceField.getText());
-            int stock = Integer.parseInt(addPartInventoryField.getText());
-            int min = Integer.parseInt(addPartMinField.getText());
-            int max = Integer.parseInt(addPartMaxField.getText());
+            
             int machineId = Integer.parseInt(addPartInOutField.getText());
             
             InHouse newPart = new InHouse(newId, name, price, stock, min, max, machineId);
             
             Inventory.addPart(newPart);
            
-            Stage stage = (Stage) addPartCancelBtn.getScene().getWindow();
-            stage.close();
+                        
+        } else if(addPartOutsourcedRadio.isSelected()) {
             
-            FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(getClass().getResource("/view/mainScreen.fxml"));
-            loader.load();
+            String companyName = addPartInOutField.getText();
             
-            MainScreenController MSC = loader.getController();
-            ActionEvent makeItSo = new ActionEvent();
-            MSC.onPartsSearch(makeItSo);            
+            Outsourced newPart = new Outsourced(newId, name, price, stock, min, max, companyName);
+            
+            Inventory.addPart(newPart);
         }
+        
+        Stage stage = (Stage) addPartCancelBtn.getScene().getWindow();
+        stage.close();
+
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource("/view/mainScreen.fxml"));
+        loader.load();
+
+        MainScreenController MSC = loader.getController();
+        ActionEvent makeItSo = new ActionEvent();
+        MSC.onPartsSearch(makeItSo);
     }
     
     @FXML
