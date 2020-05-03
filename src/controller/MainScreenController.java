@@ -1,6 +1,5 @@
 package controller;
 
-import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.collections.ObservableList;
@@ -18,9 +17,11 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import model.InHouse;
 import model.Part;
 import model.Product;
 import model.Inventory;
+import model.Outsourced;
 
 
 /**
@@ -34,7 +35,7 @@ public class MainScreenController implements Initializable {
     @FXML
     private AnchorPane productsAnchorPane;
     @FXML
-    public TableView productsTableView;
+    public TableView<Product> productsTableView;
     @FXML
     public TableColumn productIdCol;
     @FXML
@@ -62,7 +63,7 @@ public class MainScreenController implements Initializable {
     @FXML
     private AnchorPane partsAnchorPane;
     @FXML
-    public TableView partsTableView;
+    public TableView<Part> partsTableView;
     @FXML
     public TableColumn partIdCol;
     @FXML
@@ -139,8 +140,7 @@ public class MainScreenController implements Initializable {
 
     
     
-    public void onPartsAdd(ActionEvent actionEvent) throws IOException {
-        System.out.println("Parts Add Clicked");
+    public void onPartsAdd(ActionEvent actionEvent) throws Exception {
         
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/addPartScreen.fxml"));
         Parent root = loader.load(); // AddPartScreenController initializes here
@@ -152,67 +152,57 @@ public class MainScreenController implements Initializable {
         stage.setResizable(false);
     }    
     
-    
-    
-    
-    
-    public void onPartsModify(ActionEvent actionEvent) {
-        System.out.println("Parts Modify Clicked");
+
+    public void onPartsModify(ActionEvent actionEvent) throws Exception {
+        FXMLLoader modifyLoader = new FXMLLoader(getClass().getResource("/view/modifyPartScreen.fxml"));
+        Parent modifyRoot = modifyLoader.load(); 
+        
+        Stage modifyStage = new Stage();
+        modifyStage.setTitle("");
+        modifyStage.setScene(new Scene(modifyRoot, 600, 400));
+        modifyStage.show();
+        modifyStage.setResizable(false);
     }
-    
+      
     
     
     public void onPartsDelete(ActionEvent actionEvent) {
-        System.out.println("Parts Delete Clicked");
+        Part selectedPart = partsTableView.getSelectionModel().getSelectedItem();
+        Inventory.deletePart(selectedPart);
     }
     
     
-    
     public void onProductsSearch(ActionEvent actionEvent) {
-        
         String r = productsTextField.getText();
-        
         ObservableList<Product> products = Inventory.lookupProduct(r);
-        
         if(products.size() == 0) {
-            
             try {
                 int productId = Integer.parseInt(r);
                 Product pdt = Inventory.lookupProduct(productId);
                 if(pdt != null)
                     products.add(pdt);
             }
-            
             catch(NumberFormatException e)
             {
                 // ignore
             }
-            
         }
-        
         productsTableView.setItems(products);
         productsTextField.setText("");
     }
-    
-    
     
     public void onProductsAdd(ActionEvent actionEvent){
         System.out.println("Products Add Clicked");
     }
     
-    
-    
     public void onProductsModify(ActionEvent actionEvent){
         System.out.println("Products Modify Clicked");
     }
     
-    
-    
     public void onProductsDelete(ActionEvent actionEvent){
-        System.out.println("Products Delete Clicked");
+        Product selectedProduct = productsTableView.getSelectionModel().getSelectedItem();
+        Inventory.deleteProduct(selectedProduct);
     }
-    
-    
     
     public void onMainExit(ActionEvent actionEvent){
         System.out.println("Main Exit Clicked");

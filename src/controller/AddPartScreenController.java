@@ -67,18 +67,19 @@ public class AddPartScreenController implements Initializable {
     @FXML
     private Button addPartCancelBtn;
     
-    
 
     /**
      * Initializes the controller class.
      */
+    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         ToggleGroup group = new ToggleGroup();
         addPartInHouseRadio.setToggleGroup(group);
         addPartInHouseRadio.fire();
         addPartOutsourcedRadio.setToggleGroup(group);
-        addPartInOutLabel.setText("Machine ID");
+        
+        // receive Part variable from MainScreenController
         
         
     }    
@@ -102,14 +103,13 @@ public class AddPartScreenController implements Initializable {
     @FXML
     public void onAddPartSave(ActionEvent actionEvent) throws Exception {
         
-        int q = 1;
+        int q = 0;
         int newId = q;
         for(Part pt : allParts) {
             Part searchPart = Inventory.lookupPart(q);          // search by part ID method called here
             if(searchPart != null) {                            // the goal is to find either the first missing part ID
                 q = q + 1;                                      // in the case of a deleted part
                 newId = q;                                      // or the first available part ID
-                System.out.println(q);
             } 
         }
         
@@ -127,6 +127,7 @@ public class AddPartScreenController implements Initializable {
             InHouse newPart = new InHouse(newId, name, price, stock, min, max, machineId);
             
             Inventory.addPart(newPart);
+            System.out.println(newPart.getMachineId());
            
                         
         } else if(addPartOutsourcedRadio.isSelected()) {
@@ -136,7 +137,10 @@ public class AddPartScreenController implements Initializable {
             Outsourced newPart = new Outsourced(newId, name, price, stock, min, max, companyName);
             
             Inventory.addPart(newPart);
+            System.out.println(newPart.getCompanyName());
         }
+        
+        
         
         Stage stage = (Stage) addPartCancelBtn.getScene().getWindow();
         stage.close();

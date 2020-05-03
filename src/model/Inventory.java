@@ -2,8 +2,10 @@ package model;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.fxml.FXMLLoader;
-
+import model.InHouse;
+import model.Outsourced;
+import model.Part;
+import model.Product;
 
 
 /**
@@ -78,21 +80,43 @@ public class Inventory {
     
 
 
-//    public void updatePart(int index, Part selectedPart) {
-//        // To do
-//    }
+    public static void updatePart(int index, Part selectedPart) throws Exception {
+        
+
+        
+    }
+    
+    
+    
+    
 //    
 //    public void updateProduct(int index, Product newProduct) {
 //        // To do
 //    }
 //    
-//    public boolean deletePart(Part selectedPart) {
-//        // To do
-//    }
-//    
-//    public boolean deleteProduct(Product selectedProduct) {
-//        // To do
-//    }
+    public static boolean deletePart(Part selectedPart) {
+        
+        if(allParts.contains(selectedPart)) {
+          allParts.remove(selectedPart);
+          return true;
+        } else {
+            return false;
+        }
+        
+        
+        
+    }
+ 
+    public static boolean deleteProduct(Product selectedProduct) {
+        
+        if(allProducts.contains(selectedProduct)) {
+          allProducts.remove(selectedProduct);
+          return true;
+        } else {
+            return false;
+        }
+        
+    }
     
     public static ObservableList<Part> getAllParts() {
         return allParts;
