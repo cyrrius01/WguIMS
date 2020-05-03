@@ -2,6 +2,9 @@ package model;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.fxml.FXMLLoader;
+
+
 
 /**
  *
@@ -9,22 +12,19 @@ import javafx.collections.ObservableList;
  */
 public class Inventory {
     
-    private static ObservableList<Part> allParts;
-    private static ObservableList<Product> allProducts;
+    private static ObservableList<Part> allParts = Part.getAllParts();
+    private static ObservableList<Product> allProducts = Product.getAllProducts();
     
-    public void addPart(Part newPart) {
-        // To do
-        // to set Id automatically, get current size of array list and add one
+    public static void addPart(Part newPart) {
+        allParts.add(newPart);        
     }
     
     public void addProduct(Product newProduct) {
-        // To do
-        // to set Id automatically, get current size of array list and add one
+        allProducts.add(newProduct);
     }
     
     
     public static Part lookupPart(int partId) {
-       ObservableList<Part> allParts = Part.getAllParts();
        
        for(Part pt : allParts) {
            if(pt.getId() == partId) {
@@ -35,14 +35,9 @@ public class Inventory {
         return null;
     }
     
-
-    
-    
-    
     public static ObservableList<Part> lookupPart(String partialName) {
        ObservableList<Part> namedParts = FXCollections.observableArrayList();
        
-       ObservableList<Part> allParts = Part.getAllParts();
        
        for(Part pt : allParts) {
            if(pt.getName().contains(partialName)) { 
@@ -57,7 +52,6 @@ public class Inventory {
     
     
     public static Product lookupProduct(int productId) {
-        ObservableList<Product> allProducts = Product.getAllProducts();
         
         for(Product pdt : allProducts) {
             if(pdt.getId() == productId) {
@@ -68,12 +62,10 @@ public class Inventory {
         return null;
     }
     
-    
-    
     public static ObservableList<Product> lookupProduct(String partialName) {
         ObservableList<Product> namedProducts = FXCollections.observableArrayList();
         
-        ObservableList<Product> allProducts = Product.getAllProducts();
+        
         
         for(Product pdt : allProducts) {
             if(pdt.getName().contains(partialName)) {

@@ -2,8 +2,10 @@ package controller;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -11,6 +13,9 @@ import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
 import javafx.stage.Stage;
+import model.Part;
+import model.InHouse;
+import model.Inventory;
 
 /**
  * FXML Controller class
@@ -18,6 +23,9 @@ import javafx.stage.Stage;
  * @author Keith A Graham
  */
 public class AddPartScreenController implements Initializable {
+    
+    private static ObservableList<Part> allParts = Part.getAllParts();
+    
 
     @FXML
     private Label addPartLabel;
@@ -76,31 +84,59 @@ public class AddPartScreenController implements Initializable {
     
     public void inHouseClick(ActionEvent actionEvent) {
         
-        if(addPartInHouseRadio.isSelected()) {
-            addPartInOutLabel.setText("Machine ID");
-            
-            addPartInOutField.setPromptText("Mach ID");
-            
-            
-            // set field type to int
-            // and set prompt text to Mach Id
+        if(addPartInHouseRadio.isSelected()) {              // we check to see if the InHouse radio button is selected
+            addPartInOutLabel.setText("Machine ID");        // and if it is, set the Label to Machine ID
+            addPartInOutField.setPromptText("Mach ID");     // and also set the prompt text to Mach ID
         } 
     }
     
     public void outsourceClick(ActionEvent actionEvent) {
-        if(addPartOutsourcedRadio.isSelected()) {
-            addPartInOutLabel.setText("Company Name");
-            addPartInOutField.setPromptText("Comp Nm");
+        if(addPartOutsourcedRadio.isSelected()) {           // we check to see if the Outsourced radio button is selected
+            addPartInOutLabel.setText("Company Name");      // and if it is, set the Label to Company Name
+            addPartInOutField.setPromptText("Comp Nm");     // and the prompt text to Comp Nm
         }
     }
 
     
     @FXML
-    public void onAddPartSave(ActionEvent actionEvent) {
+    public void onAddPartSave(ActionEvent actionEvent) throws Exception {
         
-        // this will retrieve all of the field inputs and compile them into the selected Part type
-        // so if(InHouse selected) do(build Inhouse object) else build Outsourced object
+        int q = 1;
+        int newId = q;
+        for(Part pt : allParts) {
+            Part searchPart = Inventory.lookupPart(q);          // search by part ID method called here
+            if(searchPart != null) {                            // the goal is to find either the first missing part ID
+                q = q + 1;                                      // in the case of a deleted part
+                newId = q;                                      // or the first available part ID
+                System.out.println(q);
+            } 
+        }
         
+        
+        if(addPartInHouseRadio.isSelected()) {
+       
+            String name = addPartNameField.getText();
+            double price = Double.parseDouble(addPartPriceField.getText());
+            int stock = Integer.parseInt(addPartInventoryField.getText());
+            int min = Integer.parseInt(addPartMinField.getText());
+            int max = Integer.parseInt(addPartMaxField.getText());
+            int machineId = Integer.parseInt(addPartInOutField.getText());
+            
+            InHouse newPart = new InHouse(newId, name, price, stock, min, max, machineId);
+            
+            Inventory.addPart(newPart);
+           
+            Stage stage = (Stage) addPartCancelBtn.getScene().getWindow();
+            stage.close();
+            
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(getClass().getResource("/view/mainScreen.fxml"));
+            loader.load();
+            
+            MainScreenController MSC = loader.getController();
+            ActionEvent makeItSo = new ActionEvent();
+            MSC.onPartsSearch(makeItSo);            
+        }
     }
     
     @FXML

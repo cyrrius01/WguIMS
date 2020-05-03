@@ -150,9 +150,6 @@ public class MainScreenController implements Initializable {
         stage.setScene(new Scene(root, 600, 400));
         stage.show();
         stage.setResizable(false);
-        
-     
-        
     }    
     
     
