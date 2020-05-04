@@ -9,6 +9,8 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
@@ -17,11 +19,9 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
-import model.InHouse;
 import model.Part;
 import model.Product;
 import model.Inventory;
-import model.Outsourced;
 
 
 /**
@@ -160,21 +160,32 @@ public class MainScreenController implements Initializable {
 
     public void onPartsModify(ActionEvent actionEvent) {
         
-       Part part = partsTableView.getSelectionModel().getSelectedItem();
-       ModifyPartScreenController.receivePart(part);
+        if(partsTableView.getSelectionModel().getSelectedItem() == null) {
+            Alert alert = new Alert(AlertType.INFORMATION);
+            alert.setHeaderText(null);
+            alert.setContentText("You must select a part from the list to modify.");
+            alert.showAndWait();
+        } else {
+            Part part = partsTableView.getSelectionModel().getSelectedItem();
+            ModifyPartScreenController.receivePart(part);
+            
+            try {       
+            Parent root = FXMLLoader.load(getClass().getResource("/view/modifyPartScreen.fxml"));
+
+            Stage stage = new Stage();
+            stage.setTitle("");
+            stage.setScene(new Scene(root, 600, 400));
+            stage.show();
+            stage.setResizable(false);
+            }
+            catch (Exception e){
+                e.printStackTrace();
+            }
+        }
         
-       try {       
-        Parent root = FXMLLoader.load(getClass().getResource("/view/modifyPartScreen.fxml"));
         
-        Stage stage = new Stage();
-        stage.setTitle("");
-        stage.setScene(new Scene(root, 600, 400));
-        stage.show();
-        stage.setResizable(false);
-       }
-       catch (Exception e){
-           e.printStackTrace();
-       }
+        
+       
     }
       
     
