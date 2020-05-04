@@ -140,8 +140,9 @@ public class MainScreenController implements Initializable {
 
     
     
-    public void onPartsAdd(ActionEvent actionEvent) throws Exception {
+    public void onPartsAdd(ActionEvent actionEvent) {
         
+        try {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/addPartScreen.fxml"));
         Parent root = loader.load(); // AddPartScreenController initializes here
         
@@ -150,19 +151,30 @@ public class MainScreenController implements Initializable {
         stage.setScene(new Scene(root, 600, 400));
         stage.show();
         stage.setResizable(false);
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
     }    
     
 
-    public void onPartsModify(ActionEvent actionEvent) throws Exception {
-              
-        FXMLLoader modifyLoader = new FXMLLoader(getClass().getResource("/view/modifyPartScreen.fxml"));
-        Parent modifyRoot = modifyLoader.load(); 
+    public void onPartsModify(ActionEvent actionEvent) {
         
-        Stage modifyStage = new Stage();
-        modifyStage.setTitle("");
-        modifyStage.setScene(new Scene(modifyRoot, 600, 400));
-        modifyStage.show();
-        modifyStage.setResizable(false);
+       Part part = partsTableView.getSelectionModel().getSelectedItem();
+       ModifyPartScreenController.receivePart(part);
+        
+       try {       
+        Parent root = FXMLLoader.load(getClass().getResource("/view/modifyPartScreen.fxml"));
+        
+        Stage stage = new Stage();
+        stage.setTitle("");
+        stage.setScene(new Scene(root, 600, 400));
+        stage.show();
+        stage.setResizable(false);
+       }
+       catch (Exception e){
+           e.printStackTrace();
+       }
     }
       
     

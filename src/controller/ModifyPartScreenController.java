@@ -11,8 +11,9 @@ import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
 import javafx.stage.Stage;
-import model.Inventory;
+import model.InHouse;
 import model.Part;
+
 
 /**
  *
@@ -20,7 +21,8 @@ import model.Part;
  */
 public class ModifyPartScreenController implements Initializable {
     
-    private static int selectedPart = 0;
+    public static Part selectedPart;
+    
 
     @FXML
     private Label modifyPartLabel;
@@ -43,42 +45,61 @@ public class ModifyPartScreenController implements Initializable {
     @FXML
     private Label modifyPartInOutLabel;
     @FXML
-    public static TextField modifyPartIdField;
+    private TextField modifyPartIdField;
     @FXML
-    public static TextField modifyPartNameField;
+    private TextField modifyPartNameField;
     @FXML
-    public static TextField modifyPartInventoryField;
+    private TextField modifyPartInventoryField;
     @FXML
-    public static TextField modifyPartPriceField;
+    private TextField modifyPartPriceField;
     @FXML
-    public static TextField modifyPartMaxField;
+    private TextField modifyPartMaxField;
     @FXML
-    public static TextField modifyPartMinField;
+    private TextField modifyPartMinField;
     @FXML
-    public static TextField modifyPartInOutField;
+    private TextField modifyPartInOutField;
     @FXML
     private Button modifyPartSaveBtn;
     @FXML
     private Button modifyPartCancelBtn;
 
     
-
-    @Override
-    public void initialize(URL url, ResourceBundle rb) {  
-        try {ToggleGroup group = new ToggleGroup();
-        
-        modifyPartInHouseRadio.setToggleGroup(group);
-        modifyPartInHouseRadio.setSelected(true);
-        
-        modifyPartOutsourcedRadio.setToggleGroup(group);
-        }
-        catch(Exception e) {
-            System.out.println("Wrapper Exception: " + e);
-            System.out.println("Underlying Exception: " + e.getCause());
-        }
+    
+    public static void receivePart(Part part){
+        selectedPart = part;
         
     }
 
+    @Override
+    public void initialize(URL url, ResourceBundle rb) {  
+        
+        try {
+            ToggleGroup group = new ToggleGroup();
+            modifyPartInHouseRadio.setToggleGroup(group);
+            modifyPartInHouseRadio.setSelected(true);
+            modifyPartOutsourcedRadio.setToggleGroup(group);
+            modifyPartIdField.setText(Integer.toString(selectedPart.getId()));
+            modifyPartNameField.setText(selectedPart.getName());
+            modifyPartInventoryField.setText(Integer.toString(selectedPart.getStock()));
+            modifyPartPriceField.setText(Double.toString(selectedPart.getPrice()));
+            modifyPartMaxField.setText(Integer.toString(selectedPart.getMax()));
+            modifyPartMinField.setText(Integer.toString(selectedPart.getMin()));
+//            if(selectedPart instanceof InHouse) {
+//                int x = getMachineId();
+//                modifyPartInOutField.setText(Integer.toString(selectedPart.getMachineId()));
+//                modifyPartInHouseRadio.setSelected(true);
+//            } else if(selectedPart instanceof Outsourced) {
+//                // do stuff too
+//                modifyPartOutsourcedRadio.setSelected(true);
+//            }
+        }
+        catch(Exception e) {
+            e.printStackTrace();
+        }
+        
+    }
+    
+    
    
     
     public void onModifyPartSave(ActionEvent actionEvent) {
