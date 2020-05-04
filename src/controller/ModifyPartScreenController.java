@@ -12,9 +12,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
 import javafx.stage.Stage;
 import model.Part;
-import model.InHouse;
-import model.Inventory;
-import model.Outsourced;
 
 /**
  *
@@ -27,9 +24,9 @@ public class ModifyPartScreenController implements Initializable {
     @FXML
     private Label modifyPartLabel;
     @FXML
-    public static RadioButton modifyPartInHouseRadio;
+    private RadioButton modifyPartInHouseRadio;
     @FXML
-    public static RadioButton modifyPartOutsourcedRadio;
+    private RadioButton modifyPartOutsourcedRadio;
     @FXML
     private Label modifyPartIdLabel;
     @FXML
@@ -67,6 +64,17 @@ public class ModifyPartScreenController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {  
+        try {ToggleGroup group = new ToggleGroup();
+        
+        modifyPartInHouseRadio.setToggleGroup(group);
+        modifyPartInHouseRadio.setSelected(true);
+        
+        modifyPartOutsourcedRadio.setToggleGroup(group);
+        }
+        catch(Exception e) {
+            System.out.println("Wrapper Exception: " + e);
+            System.out.println("Underlying Exception: " + e.getCause());
+        }
         
     }
 
@@ -83,12 +91,18 @@ public class ModifyPartScreenController implements Initializable {
         selectedPart = part;
     }
     
-    public void ModifyInHouseClick(ActionEvent actionEvent) {
-        // to do
+    public void modifyInHouseClick(ActionEvent actionEvent) {
+        if(modifyPartInHouseRadio.isSelected()) {              // we check to see if the InHouse radio button is selected
+            modifyPartInOutLabel.setText("Machine ID");        // and if it is, set the Label to Machine ID
+            
+        }
     }
     
-    public void ModifyOutsourceClick(ActionEvent actionEvent) {
-        // to do
+    public void modifyOutsourceClick(ActionEvent actionEvent) {
+        if(modifyPartOutsourcedRadio.isSelected()) {           // we check to see if the Outsourced radio button is selected
+            modifyPartInOutLabel.setText("Company Name");      // and if it is, set the Label to Company Name
+            
+        }
     }
     
 }

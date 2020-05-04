@@ -76,7 +76,7 @@ public class AddPartScreenController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         ToggleGroup group = new ToggleGroup();
         addPartInHouseRadio.setToggleGroup(group);
-        addPartInHouseRadio.fire();
+        addPartInHouseRadio.setSelected(true);
         addPartOutsourcedRadio.setToggleGroup(group);
         
         // receive Part variable from MainScreenController
