@@ -17,9 +17,14 @@ public abstract class Part {
     
     
     public static ObservableList<Part> allParts = FXCollections.observableArrayList();
-    
-    {
-        init();
+
+    public Part(int id, String name, double price, int stock, int min, int max) {
+        this.id = id;
+        this.name = name;
+        this.price = price;
+        this.stock = stock;
+        this.min = min;
+        this.max = max;
     }
     
     public void setId(int id) {
@@ -62,23 +67,6 @@ public abstract class Part {
     }
     public int getMax() {
         return this.max;
-    }
-    
-    public void init() {
-        if (allParts.isEmpty()) {
-        allParts.add(new InHouse(0,"AMD CPU",75.25,37,10,100, 10001));
-        allParts.add(new InHouse(1,"Intel CPU", 125.39, 12,10,100, 10002));
-        allParts.add(new InHouse(2,"AMD Motherboard",95.99,49,10,100, 10003));
-        allParts.add(new InHouse(3,"Intel Motherboard",150.99,33,10,100, 10004));
-        allParts.add(new InHouse(4,"HDD",49.99,75,10,100, 10005));
-        allParts.add(new InHouse(5,"SSD",76.99,40,10,100, 10006));
-        allParts.add(new Outsourced(6,"nVidia Graphics", 129.99, 30,10,100,"Card Warehouse"));
-        allParts.add(new Outsourced(7,"AMD Graphics", 79.99, 30, 10, 100, "Card Warehouse"));
-        allParts.add(new Outsourced(8, "Logitech Keyboard", 30.00, 90, 10, 100, "New Egg"));
-        allParts.add(new Outsourced(9, "Razer mouse", 99.99, 20, 10, 100, "New Egg"));
-        allParts.add(new Outsourced(10, "Logitech Webcam", 29.99, 42, 10, 100, "Cheap Parts"));
-        allParts.add(new Outsourced(11, "Mouse Pad", 5.99, 83, 10, 100, "Cheap Parts"));
-        }
     }
         
 }

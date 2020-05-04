@@ -35,15 +35,15 @@ public class MainScreenController implements Initializable {
     @FXML
     private AnchorPane productsAnchorPane;
     @FXML
-    public TableView<Product> productsTableView;
+    private TableView<Product> productsTableView;
     @FXML
-    public TableColumn productIdCol;
+    private TableColumn<Product, Integer> productIdCol;
     @FXML
-    public TableColumn productNameCol;
+    private TableColumn<Product, String> productNameCol;
     @FXML
-    public TableColumn productsInventoryLevelCol;
+    private TableColumn<Product, Integer> productsInventoryLevelCol;
     @FXML
-    public TableColumn productsPriceCol;
+    private TableColumn<Product, Double> productsPriceCol;
     @FXML
     private Label labelProducts;
     @FXML
@@ -63,15 +63,15 @@ public class MainScreenController implements Initializable {
     @FXML
     private AnchorPane partsAnchorPane;
     @FXML
-    public TableView<Part> partsTableView;
+    private TableView<Part> partsTableView;
     @FXML
-    public TableColumn partIdCol;
+    private TableColumn<Part, Integer> partIdCol;
     @FXML
-    public TableColumn partNameCol;
+    private TableColumn<Part, String> partNameCol;
     @FXML
-    public TableColumn partsInventoryLevelCol;
+    private TableColumn<Part, Integer> partsInventoryLevelCol;
     @FXML
-    public TableColumn partsPriceCol;
+    private TableColumn<Part, Double> partsPriceCol;
     @FXML
     private Label labelParts;
     @FXML
@@ -88,23 +88,28 @@ public class MainScreenController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         
-        partIdCol.setCellValueFactory(new PropertyValueFactory<>("id"));
-        partNameCol.setCellValueFactory(new PropertyValueFactory<>("name"));
-        partsInventoryLevelCol.setCellValueFactory(new PropertyValueFactory<>("stock"));
-        partsPriceCol.setCellValueFactory(new PropertyValueFactory<>("price"));
+        // API methods for TableView
+        // setItems()
+        // getSelectionModel()
+        // getSelectedIndex()
+        // getSelectedItem()
+        // select()
         
-        ObservableList<Part> parts = Inventory.getAllParts();
-        partsTableView.setItems(parts);
-        
-        
-      
-        productIdCol.setCellValueFactory(new PropertyValueFactory<>("id"));
-        productNameCol.setCellValueFactory(new PropertyValueFactory<>("name"));
-        productsInventoryLevelCol.setCellValueFactory(new PropertyValueFactory<>("stock"));
-        productsPriceCol.setCellValueFactory(new PropertyValueFactory<>("price"));   
-        
-        ObservableList<Product> products = Product.getAllProducts();
-        productsTableView.setItems(products);
+       partsTableView.setItems(Inventory.getAllParts());
+       
+       partIdCol.setCellValueFactory(new PropertyValueFactory<>("id")); // gets id of Part and populates the cell
+       partNameCol.setCellValueFactory(new PropertyValueFactory<>("name"));
+       partsInventoryLevelCol.setCellValueFactory(new PropertyValueFactory<>("stock"));
+       partsPriceCol.setCellValueFactory(new PropertyValueFactory<>("price"));
+       
+       productsTableView.setItems(Inventory.getAllProducts());
+       
+       productIdCol.setCellValueFactory(new PropertyValueFactory<>("id"));
+       productNameCol.setCellValueFactory(new PropertyValueFactory<>("name"));
+       productsInventoryLevelCol.setCellValueFactory(new PropertyValueFactory<>("stock"));
+       productsPriceCol.setCellValueFactory(new PropertyValueFactory<>("price"));
+       
+       
     }    
     
     

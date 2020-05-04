@@ -28,9 +28,6 @@ public class Product {
         this.max = max;
     }
     
-    {
-        init();
-    }   
     
     public void setId(int id) {
         this.id = id;
@@ -97,16 +94,10 @@ public class Product {
     
     // need to initialize associatedParts - list is empty
     
-    public void init() {
-        if (allProducts.isEmpty()) {
-            allProducts.add(new Product(associatedParts, 1, "Intel PC A", 1299.00, 20, 5, 20));
-            allProducts.add(new Product(associatedParts, 2, "Intel PC B", 1199.00, 19, 5, 20));
-            allProducts.add(new Product(associatedParts, 3, "Intel PC C", 999.00, 15, 5, 20));
-            allProducts.add(new Product(associatedParts, 4, "AMD PC A", 699.00, 12, 5, 20));
-            allProducts.add(new Product(associatedParts, 5, "AMD PC B", 650.00, 12, 5, 20));
-            allProducts.add(new Product(associatedParts, 6, "AMD PC C", 499.00, 7, 5, 20));
-        }
-    }
+   
+        
+            
+    
     
     public static ObservableList<Product> getAllProducts() {
         return allProducts;
