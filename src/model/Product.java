@@ -8,7 +8,7 @@ import javafx.collections.ObservableList;
  * @author Keith Graham 4/30/2020
  */
 public class Product {
-    private static ObservableList<Part> associatedParts = FXCollections.observableArrayList();
+    private ObservableList<Part> associatedParts = FXCollections.observableArrayList();
     private int id;
     private String name;
     private double price;
@@ -28,7 +28,7 @@ public class Product {
         this.max = max;
     }
     
-    static {
+    {
         init();
     }   
     
@@ -97,7 +97,7 @@ public class Product {
     
     // need to initialize associatedParts - list is empty
     
-    public static void init() {
+    public void init() {
         if (allProducts.isEmpty()) {
             allProducts.add(new Product(associatedParts, 1, "Intel PC A", 1299.00, 20, 5, 20));
             allProducts.add(new Product(associatedParts, 2, "Intel PC B", 1199.00, 19, 5, 20));

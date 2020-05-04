@@ -25,7 +25,7 @@ import model.Outsourced;
  */
 public class AddPartScreenController implements Initializable {
     
-    private static ObservableList<Part> allParts = Part.getAllParts();
+    private static ObservableList<Part> allParts = Inventory.getAllParts();
     
 
     @FXML
@@ -106,7 +106,9 @@ public class AddPartScreenController implements Initializable {
             if(searchPart != null) {                            // the goal is to find either the first missing part ID
                 q = q + 1;                                      // in the case of a deleted part
                 newId = q;                                      // or the first available part ID
-            } 
+            } else {
+                newId = 0;
+            }
         }
         
         String name = addPartNameField.getText();

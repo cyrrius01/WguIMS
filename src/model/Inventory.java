@@ -14,14 +14,14 @@ import model.Product;
  */
 public class Inventory {
     
-    private static ObservableList<Part> allParts = Part.getAllParts();
+    private static ObservableList<Part> allParts = getAllParts();
     private static ObservableList<Product> allProducts = Product.getAllProducts();
     
     public static void addPart(Part newPart) {
         allParts.add(newPart);        
     }
     
-    public void addProduct(Product newProduct) {
+    public static void addProduct(Product newProduct) {
         allProducts.add(newProduct);
     }
     
@@ -82,7 +82,7 @@ public class Inventory {
 
     public static void updatePart(int index, Part selectedPart) throws Exception {
         
-
+        // to do
         
     }
     
@@ -90,7 +90,7 @@ public class Inventory {
     
     
 //    
-//    public void updateProduct(int index, Product newProduct) {
+//    public static void updateProduct(int index, Product newProduct) {
 //        // To do
 //    }
 //    
@@ -125,27 +125,6 @@ public class Inventory {
     public static ObservableList<Product> getAllProducts() {
         return allProducts;
     }
-    
-    // Part newPart = InHouse part; -- this is one way to create a new InHouse part or Outsourced
-    
-    // Outsourced ou1 = new Outsourced():  /*
-    // InHouse inh1 = new InHouse();        *
-    //                                      *
-    // allParts.add(ou1)                    *
-    // allParts.add(inh1                    */ this is another way to add parts 
-    
-    /*
-        determine if it is an InHouse or Outsourced part 
-        by using if (part instanceof Outsourced) {
-                    *radio button Outsourced is selected and companyName field displays;
-                    ((Outsourced)part).getCompanyName(); // this is casting the part as an outsourced part
-                    } else if (part instanceof InHouse) {
-                        * radio button InHouse is selected and machineId field displays;
-                        ((InHouse)part).getMachineId();
-                    }
-    
-    */
-    
     
     
 }

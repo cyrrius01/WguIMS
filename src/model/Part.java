@@ -18,7 +18,7 @@ public abstract class Part {
     
     public static ObservableList<Part> allParts = FXCollections.observableArrayList();
     
-    static {
+    {
         init();
     }
     
@@ -64,7 +64,7 @@ public abstract class Part {
         return this.max;
     }
     
-    public static void init() {
+    public void init() {
         if (allParts.isEmpty()) {
         allParts.add(new InHouse(0,"AMD CPU",75.25,37,10,100, 10001));
         allParts.add(new InHouse(1,"Intel CPU", 125.39, 12,10,100, 10002));
@@ -80,9 +80,5 @@ public abstract class Part {
         allParts.add(new Outsourced(11, "Mouse Pad", 5.99, 83, 10, 100, "Cheap Parts"));
         }
     }
-    
-    public static ObservableList<Part> getAllParts() {
-        return allParts;
-    }
-    
+        
 }

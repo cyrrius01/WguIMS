@@ -93,7 +93,7 @@ public class MainScreenController implements Initializable {
         partsInventoryLevelCol.setCellValueFactory(new PropertyValueFactory<>("stock"));
         partsPriceCol.setCellValueFactory(new PropertyValueFactory<>("price"));
         
-        ObservableList<Part> parts = Part.getAllParts();
+        ObservableList<Part> parts = Inventory.getAllParts();
         partsTableView.setItems(parts);
         
         
@@ -182,10 +182,7 @@ public class MainScreenController implements Initializable {
                 e.printStackTrace();
             }
         }
-        
-        
-        
-       
+   
     }
       
     
