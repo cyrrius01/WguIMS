@@ -23,6 +23,8 @@ public class InHouse extends Part {
         this.setMax(max);
         this.machineId = machineId;
     }
+    
+    
 
     public void setMachineId(int machineId) {
         this.machineId = machineId;

@@ -66,12 +66,12 @@ public abstract class Part {
     
     public static void init() {
         if (allParts.isEmpty()) {
-        allParts.add(new InHouse(0,"AMD CPU",75.25,37,10,100, 00001));
-        allParts.add(new InHouse(1,"Intel CPU", 125.39, 12,10,100, 00002));
-        allParts.add(new InHouse(2,"AMD Motherboard",95.99,49,10,100, 00003));
-        allParts.add(new InHouse(3,"Intel Motherboard",150.99,33,10,100, 00004));
-        allParts.add(new InHouse(4,"HDD",49.99,75,10,100, 00005));
-        allParts.add(new InHouse(5,"SSD",76.99,40,10,100, 00006));
+        allParts.add(new InHouse(0,"AMD CPU",75.25,37,10,100, 10001));
+        allParts.add(new InHouse(1,"Intel CPU", 125.39, 12,10,100, 10002));
+        allParts.add(new InHouse(2,"AMD Motherboard",95.99,49,10,100, 10003));
+        allParts.add(new InHouse(3,"Intel Motherboard",150.99,33,10,100, 10004));
+        allParts.add(new InHouse(4,"HDD",49.99,75,10,100, 10005));
+        allParts.add(new InHouse(5,"SSD",76.99,40,10,100, 10006));
         allParts.add(new Outsourced(6,"nVidia Graphics", 129.99, 30,10,100,"Card Warehouse"));
         allParts.add(new Outsourced(7,"AMD Graphics", 79.99, 30, 10, 100, "Card Warehouse"));
         allParts.add(new Outsourced(8, "Logitech Keyboard", 30.00, 90, 10, 100, "New Egg"));

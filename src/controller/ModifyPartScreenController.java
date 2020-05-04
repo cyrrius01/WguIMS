@@ -12,7 +12,9 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
 import javafx.stage.Stage;
 import model.InHouse;
+import model.Outsourced;
 import model.Part;
+
 
 
 /**
@@ -84,14 +86,17 @@ public class ModifyPartScreenController implements Initializable {
             modifyPartPriceField.setText(Double.toString(selectedPart.getPrice()));
             modifyPartMaxField.setText(Integer.toString(selectedPart.getMax()));
             modifyPartMinField.setText(Integer.toString(selectedPart.getMin()));
-//            if(selectedPart instanceof InHouse) {
-//                int x = getMachineId();
-//                modifyPartInOutField.setText(Integer.toString(selectedPart.getMachineId()));
-//                modifyPartInHouseRadio.setSelected(true);
-//            } else if(selectedPart instanceof Outsourced) {
-//                // do stuff too
-//                modifyPartOutsourcedRadio.setSelected(true);
-//            }
+            
+            
+            if(selectedPart instanceof InHouse) {
+                InHouse part = (InHouse) selectedPart;
+                modifyPartInOutField.setText(Integer.toString(part.getMachineId()));
+                modifyPartInHouseRadio.setSelected(true);
+            } else if(selectedPart instanceof Outsourced) {
+                Outsourced part = (Outsourced) selectedPart;
+                modifyPartInOutField.setText(part.getCompanyName());
+                modifyPartOutsourcedRadio.setSelected(true);
+            }
         }
         catch(Exception e) {
             e.printStackTrace();
