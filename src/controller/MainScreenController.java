@@ -154,6 +154,7 @@ public class MainScreenController implements Initializable {
     
 
     public void onPartsModify(ActionEvent actionEvent) throws Exception {
+              
         FXMLLoader modifyLoader = new FXMLLoader(getClass().getResource("/view/modifyPartScreen.fxml"));
         Parent modifyRoot = modifyLoader.load(); 
         

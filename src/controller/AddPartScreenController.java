@@ -77,11 +77,7 @@ public class AddPartScreenController implements Initializable {
         ToggleGroup group = new ToggleGroup();
         addPartInHouseRadio.setToggleGroup(group);
         addPartInHouseRadio.setSelected(true);
-        addPartOutsourcedRadio.setToggleGroup(group);
-        
-        // receive Part variable from MainScreenController
-        
-        
+        addPartOutsourcedRadio.setToggleGroup(group);  
     }    
     
     public void inHouseClick(ActionEvent actionEvent) {

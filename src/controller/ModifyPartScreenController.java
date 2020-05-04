@@ -11,6 +11,7 @@ import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
 import javafx.stage.Stage;
+import model.Inventory;
 import model.Part;
 
 /**
@@ -19,7 +20,7 @@ import model.Part;
  */
 public class ModifyPartScreenController implements Initializable {
     
-    private static Part selectedPart = null;
+    private static int selectedPart = 0;
 
     @FXML
     private Label modifyPartLabel;
@@ -78,6 +79,8 @@ public class ModifyPartScreenController implements Initializable {
         
     }
 
+   
+    
     public void onModifyPartSave(ActionEvent actionEvent) {
         // To do
     }
@@ -87,9 +90,7 @@ public class ModifyPartScreenController implements Initializable {
         stage.close();
     }
     
-    public static void receiveParam(Part part) {
-        selectedPart = part;
-    }
+
     
     public void modifyInHouseClick(ActionEvent actionEvent) {
         if(modifyPartInHouseRadio.isSelected()) {              // we check to see if the InHouse radio button is selected
