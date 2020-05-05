@@ -23,54 +23,40 @@ public class Inventory {
     
     
     public static Part lookupPart(int partId) {
-       
-       for(Part pt : allParts) {
+       for(Part pt : getAllParts()) {
            if(pt.getId() == partId) {
                return pt;
            }
        }
-        
         return null;
     }
     
     public static ObservableList<Part> lookupPart(String partialName) {
        ObservableList<Part> namedParts = FXCollections.observableArrayList();
-       
-       
-       for(Part pt : allParts) {
+       for(Part pt : getAllParts()){
            if(pt.getName().contains(partialName)) { 
                namedParts.add(pt);
            }
        }
-       
        return namedParts;
     }
     
-    
-    
-    
     public static Product lookupProduct(int productId) {
-        
-        for(Product pdt : allProducts) {
+        for(Product pdt : getAllProducts()) {
             if(pdt.getId() == productId) {
                 return pdt;
             }
         }
-        
         return null;
     }
     
     public static ObservableList<Product> lookupProduct(String partialName) {
         ObservableList<Product> namedProducts = FXCollections.observableArrayList();
-        
-        
-        
-        for(Product pdt : allProducts) {
+        for(Product pdt : getAllProducts()) {
             if(pdt.getName().contains(partialName)) {
                 namedProducts.add(pdt);
             }
         }
-        
         return namedProducts;
     }
     
@@ -83,35 +69,26 @@ public class Inventory {
     }
     
     
+    public static void updateProduct(int index, Product newProduct) {
+        // To do
+    }
     
-    
-//    
-//    public static void updateProduct(int index, Product newProduct) {
-//        // To do
-//    }
-//    
     public static boolean deletePart(Part selectedPart) {
-        
         if(allParts.contains(selectedPart)) {
           allParts.remove(selectedPart);
           return true;
         } else {
             return false;
         }
-        
-        
-        
     }
  
     public static boolean deleteProduct(Product selectedProduct) {
-        
         if(allProducts.contains(selectedProduct)) {
           allProducts.remove(selectedProduct);
           return true;
         } else {
             return false;
         }
-        
     }
     
     public static ObservableList<Part> getAllParts() {
