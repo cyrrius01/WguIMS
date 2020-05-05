@@ -1,6 +1,7 @@
 package controller;
 
 import java.net.URL;
+import java.util.Optional;
 import java.util.ResourceBundle;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -12,6 +13,8 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonBar.ButtonData;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -193,8 +196,24 @@ public class MainScreenController implements Initializable {
     
     
     public void onPartsDelete(ActionEvent actionEvent) {
-        Part selectedPart = partsTableView.getSelectionModel().getSelectedItem();
+        
+        Alert alert = new Alert(AlertType.CONFIRMATION);
+        alert.setHeaderText(null);
+        alert.setContentText("Are you sure you want to delete this part?");
+        ButtonType delete = new ButtonType("Delete Part");
+        ButtonType buttonTypeCancel = new ButtonType("Cancel", ButtonData.CANCEL_CLOSE);
+        alert.getButtonTypes().setAll(delete, buttonTypeCancel);
+        
+        Optional<ButtonType> result = alert.showAndWait();
+        
+        if(result.get() == delete) {
+            Part selectedPart = partsTableView.getSelectionModel().getSelectedItem();
         Inventory.deletePart(selectedPart);
+        } else {
+            // action canceled
+        }
+        
+        
     }
     
     
@@ -226,8 +245,21 @@ public class MainScreenController implements Initializable {
     }
     
     public void onProductsDelete(ActionEvent actionEvent){
-        Product selectedProduct = productsTableView.getSelectionModel().getSelectedItem();
-        Inventory.deleteProduct(selectedProduct);
+        Alert alert = new Alert(AlertType.CONFIRMATION);
+        alert.setHeaderText(null);
+        alert.setContentText("Are you sure you want to delete this product?");
+        ButtonType delete = new ButtonType("Delete Product");
+        ButtonType buttonTypeCancel = new ButtonType("Cancel", ButtonData.CANCEL_CLOSE);
+        alert.getButtonTypes().setAll(delete, buttonTypeCancel);
+        
+        Optional<ButtonType> result = alert.showAndWait();
+        
+        if(result.get() == delete) {
+            Product selectedProduct = productsTableView.getSelectionModel().getSelectedItem();
+            Inventory.deleteProduct(selectedProduct);
+        } else {
+            // action canceled
+        }
     }
     
     public void onMainExit(ActionEvent actionEvent){
