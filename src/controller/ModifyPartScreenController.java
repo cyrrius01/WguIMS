@@ -4,6 +4,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -12,6 +13,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
 import javafx.stage.Stage;
 import model.InHouse;
+import model.Inventory;
 import model.Outsourced;
 import model.Part;
 
@@ -108,7 +110,43 @@ public class ModifyPartScreenController implements Initializable {
    
     
     public void onModifyPartSave(ActionEvent actionEvent) {
-        // To do
+        try {
+            int id = Integer.parseInt(modifyPartIdField.getText());
+            String name = modifyPartNameField.getText();
+            int stock = Integer.parseInt(modifyPartInventoryField.getText());
+            double price = Double.parseDouble(modifyPartPriceField.getText());
+            int max = Integer.parseInt(modifyPartMaxField.getText());
+            int min = Integer.parseInt(modifyPartMinField.getText());
+            
+        
+            if(modifyPartInHouseRadio.isSelected()) {
+                int machineId = Integer.parseInt(modifyPartInOutField.getText());
+                Inventory.updatePart(id, new InHouse(id, name, price, stock, max, min, machineId));
+
+
+            } else if(modifyPartOutsourcedRadio.isSelected()){
+                String companyName = modifyPartInOutField.getText();
+                Inventory.updatePart(id, new Outsourced(id, name, price, stock, max, min, companyName));
+            }
+        }
+        catch(Exception e) {
+            e.printStackTrace();
+        }
+        
+        Stage stage = (Stage) modifyPartSaveBtn.getScene().getWindow();
+        stage.close();
+        try {
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(getClass().getResource("/view/mainScreen.fxml"));
+            loader.load();
+
+            MainScreenController MSC = loader.getController();
+            ActionEvent makeItSo = new ActionEvent();
+            MSC.onPartsSearch(makeItSo);
+        }
+        catch(Exception e) {
+            e.printStackTrace();
+        }
     }
     
     public void onModifyPartCancel(ActionEvent actionEvent) {

@@ -125,7 +125,7 @@ public class AddPartScreenController implements Initializable {
             InHouse newPart = new InHouse(newId, name, price, stock, min, max, machineId);
             
             Inventory.addPart(newPart);
-            System.out.println(newPart.getMachineId());
+            
            
                         
         } else if(addPartOutsourcedRadio.isSelected()) {
@@ -135,7 +135,7 @@ public class AddPartScreenController implements Initializable {
             Outsourced newPart = new Outsourced(newId, name, price, stock, min, max, companyName);
             
             Inventory.addPart(newPart);
-            System.out.println(newPart.getCompanyName());
+            
         }
         
         

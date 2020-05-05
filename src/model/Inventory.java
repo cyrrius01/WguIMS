@@ -64,8 +64,15 @@ public class Inventory {
 
     public static void updatePart(int index, Part selectedPart) throws Exception {
         
-        // to do
+        int loc = -1;
         
+        for(Part p : getAllParts()) {
+
+            loc++;
+            if(p.getId() == index) {
+                getAllParts().set(loc, selectedPart);
+            }
+        }
     }
     
     
