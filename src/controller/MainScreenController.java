@@ -237,7 +237,19 @@ public class MainScreenController implements Initializable {
     }
     
     public void onProductsAdd(ActionEvent actionEvent){
-        System.out.println("Products Add Clicked");
+        try {       
+            Parent root = FXMLLoader.load(getClass().getResource("/view/addProductScreen.fxml"));
+
+            Stage stage = new Stage();
+            stage.setTitle("");
+            stage.setScene(new Scene(root, 1500, 620));
+            stage.show();
+            stage.setResizable(false);
+            }
+            catch (Exception e){
+                e.printStackTrace();
+            }
+        
     }
     
     public void onProductsModify(ActionEvent actionEvent){

@@ -21,6 +21,7 @@ import javafx.stage.Stage;
 import model.Part;
 import model.InHouse;
 import model.Inventory;
+import static model.Inventory.getAllParts;
 import model.Outsourced;
 
 /**
@@ -114,7 +115,7 @@ public class AddPartScreenController implements Initializable {
         
             int q = 0;
             int newId = q;
-            for(Part pt : allParts) {
+            for(Part pt : getAllParts()) {
                 Part searchPart = Inventory.lookupPart(q);          // search by part ID method called here
                 if(searchPart != null) {                            // the goal is to find either the first missing part ID
                     q = q + 1;                                      // in the case of a deleted part

@@ -72,32 +72,22 @@ public class Product {
     }
     
     public void addAssociatedPart(Part part) {
-        // To do
-        // on action event, get selected
-        // selected part add selected as associatedPart
-        // confirm part is added
+       
+       getAllAssociatedParts().add(part);
     }
     
-//    public boolean deleteAssociatedPart(Part selectedAsPart) {
-        // To do
-        // get selected part to delete
-        // Confirm if user wants to delete
-        // remove selected part from associatedParts
-//    }
+    public boolean deleteAssociatedPart(Part selectedAsPart) {
+     
+        for(Part p : getAllAssociatedParts()) {
+            if(p.getId() == selectedAsPart.getId()) {
+                return getAllAssociatedParts().remove(p);
+            }
+        } return false;
+    }
     
     public ObservableList<Part> getAllAssociatedParts() {
-        // To do
-        // get selected part
-        // check associatedParts        
         return associatedParts;
     }
-    
-    // need to initialize associatedParts - list is empty
-    
-   
-        
-            
-    
     
     public static ObservableList<Product> getAllProducts() {
         return allProducts;
