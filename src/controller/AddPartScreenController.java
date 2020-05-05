@@ -1,13 +1,18 @@
 package controller;
 
 import java.net.URL;
+import java.util.Optional;
 import java.util.ResourceBundle;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonBar.ButtonData;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
@@ -155,9 +160,21 @@ public class AddPartScreenController implements Initializable {
     @FXML
     public void onAddPartCancel(ActionEvent actionEvent) {
         
-        Stage stage = (Stage) addPartCancelBtn.getScene().getWindow();
-        stage.close();
+        Alert alert = new Alert(AlertType.CONFIRMATION);
+        alert.setHeaderText(null);
+        alert.setContentText("Are you sure you want to cancel? Any data entered will be discarded.");
+        ButtonType okay = new ButtonType("Okay");
+        ButtonType buttonTypeCancel = new ButtonType("Cancel", ButtonData.CANCEL_CLOSE);
+        alert.getButtonTypes().setAll(okay, buttonTypeCancel);
         
+        Optional<ButtonType> result = alert.showAndWait();
+        
+        if(result.get() == okay) {
+            Stage stage = (Stage) addPartCancelBtn.getScene().getWindow();
+            stage.close();
+        } else {
+            // action canceled
+        }
     }
     
     
