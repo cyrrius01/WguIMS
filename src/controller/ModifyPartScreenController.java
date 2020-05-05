@@ -115,42 +115,50 @@ public class ModifyPartScreenController implements Initializable {
    
     
     public void onModifyPartSave(ActionEvent actionEvent) {
-        try {
-            int id = Integer.parseInt(modifyPartIdField.getText());
-            String name = modifyPartNameField.getText();
-            int stock = Integer.parseInt(modifyPartInventoryField.getText());
-            double price = Double.parseDouble(modifyPartPriceField.getText());
-            int max = Integer.parseInt(modifyPartMaxField.getText());
-            int min = Integer.parseInt(modifyPartMinField.getText());
-            
+        if(Integer.parseInt(modifyPartMinField.getText()) > Integer.parseInt(modifyPartMaxField.getText())) {
+            Alert alert = new Alert(AlertType.INFORMATION);
+            alert.setHeaderText(null);
+            alert.setContentText("The minimum value cannot be greater than the maximum value.");
+            alert.showAndWait();
+        } else {
         
-            if(modifyPartInHouseRadio.isSelected()) {
-                int machineId = Integer.parseInt(modifyPartInOutField.getText());
-                Inventory.updatePart(id, new InHouse(id, name, price, stock, max, min, machineId));
+            try {
+                int id = Integer.parseInt(modifyPartIdField.getText());
+                String name = modifyPartNameField.getText();
+                int stock = Integer.parseInt(modifyPartInventoryField.getText());
+                double price = Double.parseDouble(modifyPartPriceField.getText());
+                int max = Integer.parseInt(modifyPartMaxField.getText());
+                int min = Integer.parseInt(modifyPartMinField.getText());
 
 
-            } else if(modifyPartOutsourcedRadio.isSelected()){
-                String companyName = modifyPartInOutField.getText();
-                Inventory.updatePart(id, new Outsourced(id, name, price, stock, max, min, companyName));
+                if(modifyPartInHouseRadio.isSelected()) {
+                    int machineId = Integer.parseInt(modifyPartInOutField.getText());
+                    Inventory.updatePart(id, new InHouse(id, name, price, stock, max, min, machineId));
+
+
+                } else if(modifyPartOutsourcedRadio.isSelected()){
+                    String companyName = modifyPartInOutField.getText();
+                    Inventory.updatePart(id, new Outsourced(id, name, price, stock, max, min, companyName));
+                }
             }
-        }
-        catch(Exception e) {
-            e.printStackTrace();
-        }
-        
-        Stage stage = (Stage) modifyPartSaveBtn.getScene().getWindow();
-        stage.close();
-        try {
-            FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(getClass().getResource("/view/mainScreen.fxml"));
-            loader.load();
+            catch(Exception e) {
+                e.printStackTrace();
+            }
 
-            MainScreenController MSC = loader.getController();
-            ActionEvent makeItSo = new ActionEvent();
-            MSC.onPartsSearch(makeItSo);
-        }
-        catch(Exception e) {
-            e.printStackTrace();
+            Stage stage = (Stage) modifyPartSaveBtn.getScene().getWindow();
+            stage.close();
+            try {
+                FXMLLoader loader = new FXMLLoader();
+                loader.setLocation(getClass().getResource("/view/mainScreen.fxml"));
+                loader.load();
+
+                MainScreenController MSC = loader.getController();
+                ActionEvent makeItSo = new ActionEvent();
+                MSC.onPartsSearch(makeItSo);
+            }
+            catch(Exception e) {
+                e.printStackTrace();
+            }
         }
     }
     

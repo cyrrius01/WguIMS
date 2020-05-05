@@ -104,57 +104,66 @@ public class AddPartScreenController implements Initializable {
     @FXML
     public void onAddPartSave(ActionEvent actionEvent) throws Exception {
         
-        int q = 0;
-        int newId = q;
-        for(Part pt : allParts) {
-            Part searchPart = Inventory.lookupPart(q);          // search by part ID method called here
-            if(searchPart != null) {                            // the goal is to find either the first missing part ID
-                q = q + 1;                                      // in the case of a deleted part
-                newId = q;                                      // or the first available part ID
-            } else {
-                newId = 0;
+        // do min field evaluation to ensure it does not exceed the max field value
+        if(Integer.parseInt(addPartMinField.getText()) > Integer.parseInt(addPartMaxField.getText())) {
+            Alert alert = new Alert(AlertType.INFORMATION);
+            alert.setHeaderText(null);
+            alert.setContentText("The minimum value cannot be greater than the maximum value.");
+            alert.showAndWait();
+        } else {
+        
+            int q = 0;
+            int newId = q;
+            for(Part pt : allParts) {
+                Part searchPart = Inventory.lookupPart(q);          // search by part ID method called here
+                if(searchPart != null) {                            // the goal is to find either the first missing part ID
+                    q = q + 1;                                      // in the case of a deleted part
+                    newId = q;                                      // or the first available part ID
+                } else {
+                    newId = 0;
+                }
             }
-        }
-        
-        String name = addPartNameField.getText();
-        double price = Double.parseDouble(addPartPriceField.getText());
-        int stock = Integer.parseInt(addPartInventoryField.getText());
-        int min = Integer.parseInt(addPartMinField.getText());
-        int max = Integer.parseInt(addPartMaxField.getText());
-        
-        if(addPartInHouseRadio.isSelected()) {
-       
-            
-            int machineId = Integer.parseInt(addPartInOutField.getText());
-            
-            InHouse newPart = new InHouse(newId, name, price, stock, min, max, machineId);
-            
-            Inventory.addPart(newPart);
-            
-           
-                        
-        } else if(addPartOutsourcedRadio.isSelected()) {
-            
-            String companyName = addPartInOutField.getText();
-            
-            Outsourced newPart = new Outsourced(newId, name, price, stock, min, max, companyName);
-            
-            Inventory.addPart(newPart);
-            
-        }
-        
-        
-        
-        Stage stage = (Stage) addPartCancelBtn.getScene().getWindow();
-        stage.close();
 
-        FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(getClass().getResource("/view/mainScreen.fxml"));
-        loader.load();
+            String name = addPartNameField.getText();
+            double price = Double.parseDouble(addPartPriceField.getText());
+            int stock = Integer.parseInt(addPartInventoryField.getText());
+            int min = Integer.parseInt(addPartMinField.getText());
+            int max = Integer.parseInt(addPartMaxField.getText());
 
-        MainScreenController MSC = loader.getController();
-        ActionEvent makeItSo = new ActionEvent();
-        MSC.onPartsSearch(makeItSo);
+            if(addPartInHouseRadio.isSelected()) {
+
+
+                int machineId = Integer.parseInt(addPartInOutField.getText());
+
+                InHouse newPart = new InHouse(newId, name, price, stock, min, max, machineId);
+
+                Inventory.addPart(newPart);
+
+
+
+            } else if(addPartOutsourcedRadio.isSelected()) {
+
+                String companyName = addPartInOutField.getText();
+
+                Outsourced newPart = new Outsourced(newId, name, price, stock, min, max, companyName);
+
+                Inventory.addPart(newPart);
+
+            }
+
+
+
+            Stage stage = (Stage) addPartCancelBtn.getScene().getWindow();
+            stage.close();
+
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(getClass().getResource("/view/mainScreen.fxml"));
+            loader.load();
+
+            MainScreenController MSC = loader.getController();
+            ActionEvent makeItSo = new ActionEvent();
+            MSC.onPartsSearch(makeItSo);
+        }
     }
     
     @FXML
