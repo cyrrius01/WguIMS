@@ -7,6 +7,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
@@ -24,7 +25,7 @@ import model.Product;
 
 public class ModifyProductScreenController implements Initializable {
     
-    ObservableList<Part> associatedParts = FXCollections.observableArrayList();
+    // ObservableList<Part> associatedParts = FXCollections.observableArrayList();
     
     public static Product selectedProduct;
 
@@ -75,7 +76,6 @@ public class ModifyProductScreenController implements Initializable {
 
     public static void receiveProduct(Product product){
         selectedProduct = product;
-        
     }
     
     /**
@@ -83,6 +83,14 @@ public class ModifyProductScreenController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        
+        modifyProductIdTextField.setText(Integer.toString(selectedProduct.getId()));
+        modifyProductNameTextField.setText(selectedProduct.getName());
+        modifyProductInventoryTextField.setText(Integer.toString(selectedProduct.getStock()));
+        modifyProductPriceTextField.setText(Double.toString(selectedProduct.getPrice()));
+        modifyProductMaxTextField.setText(Integer.toString(selectedProduct.getMax()));
+        modifyProductMinTextField.setText(Integer.toString(selectedProduct.getMin()));
+
         
         modifyProductTableViewAll.setItems(Inventory.getAllParts());
        
@@ -92,8 +100,8 @@ public class ModifyProductScreenController implements Initializable {
         allPartPriceCol.setCellValueFactory(new PropertyValueFactory<>("price"));
        
        
-       
-        modifyProductTableViewPartial.setItems(associatedParts);
+        
+        modifyProductTableViewPartial.setItems(selectedProduct.getAllAssociatedParts());
        
         fewPartIdCol.setCellValueFactory(new PropertyValueFactory<>("id"));
         fewPartPartNameCol.setCellValueFactory(new PropertyValueFactory<>("name"));
@@ -130,14 +138,100 @@ public class ModifyProductScreenController implements Initializable {
 
     @FXML
     private void onAddProductAddPart(ActionEvent event) {
+        Part selectedItem = modifyProductTableViewAll.getSelectionModel().getSelectedItem();
+        modifyProductTableViewPartial.getItems().add(selectedItem);
     }
 
     @FXML
     private void onAddProductDelete(ActionEvent event) {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setHeaderText(null);
+        alert.setContentText("Are you sure you want to delete this part from the product?");
+        ButtonType delete = new ButtonType("Delete Part");
+        ButtonType buttonTypeCancel = new ButtonType("Cancel", ButtonBar.ButtonData.CANCEL_CLOSE);
+        alert.getButtonTypes().setAll(delete, buttonTypeCancel);
+        
+        Optional<ButtonType> result = alert.showAndWait();
+        
+        if(result.get() == delete) {
+            Part selectedPart = modifyProductTableViewPartial.getSelectionModel().getSelectedItem();
+            
+            modifyProductTableViewPartial.getItems().remove(selectedPart);
+            
+        } else {
+            // action canceled
+        }
     }
 
     @FXML
     private void onAddProductSave(ActionEvent event) {
+        // do min field evaluation to ensure it does not exceed the max field value
+        if(Integer.parseInt(modifyProductMinTextField.getText()) > Integer.parseInt(modifyProductMaxTextField.getText())) {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setHeaderText(null);
+            alert.setContentText("The minimum value cannot be greater than the maximum value.");
+            alert.showAndWait();
+        } else {
+            
+            if(modifyProductTableViewPartial.getItems().size() == 0){
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setHeaderText(null);
+                alert.setContentText("The product must have at least one part associated with it. Please add the associated part(s).");
+                alert.showAndWait();
+            } else {
+            
+                int id = Integer.parseInt(modifyProductIdTextField.getText());
+                String name = modifyProductNameTextField.getText();
+                double price = Double.parseDouble(modifyProductPriceTextField.getText());
+                int stock = Integer.parseInt(modifyProductInventoryTextField.getText());
+                int min = Integer.parseInt(modifyProductMinTextField.getText());
+                int max = Integer.parseInt(modifyProductMaxTextField.getText());
+            
+                Product newProduct = new Product(id, name, price, stock, min, max);
+                
+                ObservableList<Part> associatedParts = FXCollections.observableArrayList();
+                associatedParts = modifyProductTableViewPartial.getItems();
+                System.out.println("Associated Parts = " + associatedParts);
+                
+                int index = modifyProductTableViewPartial.getItems().size();
+                
+                for(int i = 0; i < index; i++) {
+                    Part part = modifyProductTableViewPartial.getItems().get(i);
+                    newProduct.addAssociatedPart(part);
+                }
+                
+                Inventory.updateProduct(id, newProduct);
+            
+                
+                Stage stage = (Stage) modifyProductSaveBtn.getScene().getWindow();
+                stage.close();
+
+                try {
+                    FXMLLoader loader = new FXMLLoader();
+                    loader.setLocation(getClass().getResource("/view/mainScreen.fxml"));
+                    loader.load();
+
+                    MainScreenController MSC = loader.getController();
+                    ActionEvent makeItSo = new ActionEvent();
+                    MSC.onProductsSearch(makeItSo);
+                }
+                catch(Exception e) {
+                    e.printStackTrace();
+                }
+                
+            }
+        
+            
+            
+        }
+        
+        
+        
+        
+        
+        
+        
+        
     }
 
     @FXML

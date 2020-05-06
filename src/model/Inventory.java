@@ -77,7 +77,15 @@ public class Inventory {
     
     
     public static void updateProduct(int index, Product newProduct) {
-        // To do
+        int loc = -1;
+        
+        for(Product p : getAllProducts()) {
+            
+            loc++;
+            if(p.getId() == index) {
+                getAllProducts().set(loc, newProduct);
+            }
+        }
     }
     
     public static boolean deletePart(Part selectedPart) {

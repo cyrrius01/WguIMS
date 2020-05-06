@@ -229,7 +229,7 @@ public class AddProductScreenController implements Initializable {
                 
                 Product newProduct = new Product(newId, name, price, stock, min, max);
                 Inventory.addProduct(newProduct);
-                System.out.println(newProduct.getAllAssociatedParts());
+                
 
                 associatedParts = addProductTableViewPartial.getItems();
                 
