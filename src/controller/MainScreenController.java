@@ -254,7 +254,16 @@ public class MainScreenController implements Initializable {
     
     public void onProductsModify(ActionEvent actionEvent){
         
-         try {       
+        if(productsTableView.getSelectionModel().getSelectedItem() == null) {
+            Alert alert = new Alert(AlertType.INFORMATION);
+            alert.setHeaderText(null);
+            alert.setContentText("You must select a product from the list to modify.");
+            alert.showAndWait();
+        } else {
+            Product product = productsTableView.getSelectionModel().getSelectedItem();
+            ModifyProductScreenController.receiveProduct(product);
+            
+            try {       
             Parent root = FXMLLoader.load(getClass().getResource("/view/modifyProductScreen.fxml"));
 
             Stage stage = new Stage();
@@ -266,7 +275,7 @@ public class MainScreenController implements Initializable {
             catch (Exception e){
                 e.printStackTrace();
             }
-        
+        }
     }
     
     public void onProductsDelete(ActionEvent actionEvent){
