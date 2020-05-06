@@ -59,12 +59,12 @@ public class WguIMS extends Application {
         Inventory.addPart(os4);
         Inventory.addPart(os5);
         
-        Product pdt1 = new Product(1, "Intel PC A", 1299.00, 20, 5, 20);
-        Product pdt2 = new Product(2, "Intel PC B", 1199.00, 19, 5, 20);
-        Product pdt3 = new Product(3, "Intel PC C", 999.00, 15, 5, 20);
-        Product pdt4 = new Product(4, "AMD PC A", 699.00, 12, 5, 20);
-        Product pdt5 = new Product(5, "AMD PC B", 650.00, 12, 5, 20);
-        Product pdt6 = new Product(6, "AMD PC C", 499.00, 7, 5, 20);
+        Product pdt1 = new Product(0, "Intel PC A", 1299.00, 20, 5, 20);
+        Product pdt2 = new Product(1, "Intel PC B", 1199.00, 19, 5, 20);
+        Product pdt3 = new Product(2, "Intel PC C", 999.00, 15, 5, 20);
+        Product pdt4 = new Product(3, "AMD PC A", 699.00, 12, 5, 20);
+        Product pdt5 = new Product(4, "AMD PC B", 650.00, 12, 5, 20);
+        Product pdt6 = new Product(5, "AMD PC C", 499.00, 7, 5, 20);
         
         Inventory.addProduct(pdt1);
         Inventory.addProduct(pdt2);

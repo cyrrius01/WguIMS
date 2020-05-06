@@ -18,7 +18,6 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
-import model.InHouse;
 import model.Inventory;
 import static model.Inventory.getAllProducts;
 import model.Part;
@@ -126,6 +125,27 @@ public class AddProductScreenController implements Initializable {
     
     @FXML
     public void onAddProductDelete(ActionEvent event) {
+        
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setHeaderText(null);
+        alert.setContentText("Are you sure you want to delete this part from the product?");
+        ButtonType delete = new ButtonType("Delete Part");
+        ButtonType buttonTypeCancel = new ButtonType("Cancel", ButtonBar.ButtonData.CANCEL_CLOSE);
+        alert.getButtonTypes().setAll(delete, buttonTypeCancel);
+        
+        Optional<ButtonType> result = alert.showAndWait();
+        
+        if(result.get() == delete) {
+            Part selectedPart = addProductTableViewPartial.getSelectionModel().getSelectedItem();
+            
+            addProductTableViewPartial.getItems().remove(selectedPart);
+            
+        } else {
+            // action canceled
+        }
+        
+        
+        
     }
 
     @FXML
@@ -182,14 +202,22 @@ public class AddProductScreenController implements Initializable {
                 alert.setContentText("The product must have at least one part associated with it. Please add the associated part(s).");
                 alert.showAndWait();
             } else {
-//                Part selectedItem = addProductTableViewAll.getSelectionModel().getSelectedItem();
-//                Product product = new Product(1, "test", 1.99, 1, 1, 1);
-//                product.addAssociatedPart(selectedItem);
-                // still to do
                 
                 Product newProduct = new Product(newId, name, price, stock, min, max);
                 Inventory.addProduct(newProduct);
                 System.out.println(newProduct.getAllAssociatedParts());
+
+                associatedParts = addProductTableViewPartial.getItems();
+                
+                int index = addProductTableViewPartial.getItems().size();
+                
+                for(int i = 0; i < index; i++) {
+                    Part part = addProductTableViewPartial.getItems().get(i);
+                    newProduct.addAssociatedPart(part);
+                    
+                }
+                
+                System.out.println("associatedParts are " + newProduct.getAllAssociatedParts());
                 
                 try {
                     Stage stage = (Stage) addProductCancelBtn.getScene().getWindow();
