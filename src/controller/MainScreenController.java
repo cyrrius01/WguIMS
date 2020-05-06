@@ -253,7 +253,20 @@ public class MainScreenController implements Initializable {
     }
     
     public void onProductsModify(ActionEvent actionEvent){
-        System.out.println("Products Modify Clicked");
+        
+         try {       
+            Parent root = FXMLLoader.load(getClass().getResource("/view/modifyProductScreen.fxml"));
+
+            Stage stage = new Stage();
+            stage.setTitle("");
+            stage.setScene(new Scene(root, 1500, 620));
+            stage.show();
+            stage.setResizable(false);
+            }
+            catch (Exception e){
+                e.printStackTrace();
+            }
+        
     }
     
     public void onProductsDelete(ActionEvent actionEvent){
