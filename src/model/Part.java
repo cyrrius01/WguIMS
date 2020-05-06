@@ -16,7 +16,7 @@ public abstract class Part {
     private int max;
     
     
-    public static ObservableList<Part> allParts = FXCollections.observableArrayList();
+    public ObservableList<Part> allParts = FXCollections.observableArrayList();
 
     public Part(int id, String name, double price, int stock, int min, int max) {
         this.id = id;

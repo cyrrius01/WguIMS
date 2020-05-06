@@ -16,9 +16,9 @@ public class Product {
     private int min;
     private int max;
     
-    private static ObservableList<Product> allProducts = FXCollections.observableArrayList();
+    private ObservableList<Product> allProducts = FXCollections.observableArrayList();
     
-    public Product(ObservableList<Part> associatedParts,int id, String name, double price, int stock, int min, int max) {
+    public Product(int id, String name, double price, int stock, int min, int max) {
         this.associatedParts = associatedParts;
         this.id = id;
         this.name = name;
@@ -86,10 +86,10 @@ public class Product {
     }
     
     public ObservableList<Part> getAllAssociatedParts() {
-        return associatedParts;
+        return this.associatedParts;
     }
     
-    public static ObservableList<Product> getAllProducts() {
+    public ObservableList<Product> getAllProducts() {
         return allProducts;
     }
     

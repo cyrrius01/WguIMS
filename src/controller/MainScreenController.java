@@ -208,7 +208,7 @@ public class MainScreenController implements Initializable {
         
         if(result.get() == delete) {
             Part selectedPart = partsTableView.getSelectionModel().getSelectedItem();
-        Inventory.deletePart(selectedPart);
+            Inventory.deletePart(selectedPart);
         } else {
             // action canceled
         }
