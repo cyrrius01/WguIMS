@@ -107,6 +107,30 @@ public class AddProductScreenController implements Initializable {
     
     @FXML
     public void onAddProductSearch(ActionEvent event) {
+        
+        String q = addProductTextField.getText();
+        
+        ObservableList<Part> parts = Inventory.lookupPart(q); // search by part name method called here
+        
+        if(parts.size() == 0) {
+            
+            try {
+                int partId = Integer.parseInt(q);
+                Part pt = Inventory.lookupPart(partId);         // search by part ID method called here
+                if(pt != null) 
+                    parts.add(pt);
+            
+            }
+            
+            catch(NumberFormatException e)
+            
+            {
+                // ignore
+            }
+        }
+        addProductTableViewAll.setItems(parts);
+        addProductTextField.setText("");
+        
     }
 
  
