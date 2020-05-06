@@ -117,13 +117,9 @@ public class AddProductScreenController implements Initializable {
     public void onAddProductAddPart(ActionEvent event) {
         
         // this is triggered when the Add button is clicked
-        
         Part selectedItem = addProductTableViewAll.getSelectionModel().getSelectedItem();
+        addProductTableViewPartial.getItems().add(selectedItem);
         
-        
-        
-        
-        addProductTableViewPartial.setItems(associatedParts);
     }
 
     
@@ -186,7 +182,11 @@ public class AddProductScreenController implements Initializable {
                 alert.setContentText("The product must have at least one part associated with it. Please add the associated part(s).");
                 alert.showAndWait();
             } else {
-                ObservableList<Part> associatedParts = addProductTableViewPartial.getItems();
+//                Part selectedItem = addProductTableViewAll.getSelectionModel().getSelectedItem();
+//                Product product = new Product(1, "test", 1.99, 1, 1, 1);
+//                product.addAssociatedPart(selectedItem);
+                // still to do
+                
                 Product newProduct = new Product(newId, name, price, stock, min, max);
                 Inventory.addProduct(newProduct);
                 System.out.println(newProduct.getAllAssociatedParts());
