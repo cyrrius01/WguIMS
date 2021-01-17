@@ -151,7 +151,7 @@ public class MainScreenController implements Initializable {
     public void onPartsAdd(ActionEvent actionEvent) {
         
         try {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/addPartScreen.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/AddPartScreen.fxml"));
         Parent root = loader.load(); // AddPartScreenController initializes here
         
         Stage stage = new Stage();
